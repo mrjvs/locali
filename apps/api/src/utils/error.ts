@@ -15,3 +15,9 @@ export function isStatusError(err: any): err is StatusError {
   if (err[errorSymbol]) return true;
   return false;
 }
+
+export class NotFoundError extends StatusError {
+  constructor() {
+    super('Not found', 404);
+  }
+}

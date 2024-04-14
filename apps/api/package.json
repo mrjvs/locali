@@ -10,6 +10,10 @@
     ]
   },
   "prettier": "@repo/prettier-config",
+  "prisma": {
+    "schema": "./src/modules/prisma/schema.prisma",
+    "seed": "tsup && node dist/modules/prisma/seed.js"
+  },
   "scripts": {
     "start": "node dist/main.js",
     "build": "tsup",
@@ -21,18 +25,24 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.7",
-    "tsup": "7.2.0"
+    "prisma": "^5.12.1",
+    "tsup": "7.2.0",
+    "type-fest": "^4.15.0"
   },
   "dependencies": {
     "@fastify/cors": "^9.0.1",
+    "@fastify/swagger": "^8.14.0",
     "@prisma/client": "^5.12.1",
+    "argon2": "^0.40.1",
     "fastify": "^4.26.2",
     "fastify-type-provider-zod": "^1.1.9",
+    "jsonwebtoken": "^9.0.2",
     "neat-config": "^3.0.0",
     "pino": "^8.20.0",
     "pino-pretty": "^11.0.0",
-    "prisma": "^5.12.1",
+    "typeid-js": "^0.6.0",
     "zod": "^3.22.4"
   }
 }
