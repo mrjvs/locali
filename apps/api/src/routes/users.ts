@@ -52,7 +52,11 @@ export const usersRouter = makeRouter((app) => {
       },
     },
     handler(async ({ params, auth }) => {
-      auth.check((c) => c.isUser(params.id));
+      auth.check(
+        (c) =>
+          c.isUser(params.id) ||
+          c.hasPerm('DELETE:/user/{id}', { id: params.id }),
+      );
 
       const oldUsers = await prisma.user.deleteMany({
         where: {
@@ -77,7 +81,7 @@ export const usersRouter = makeRouter((app) => {
     },
     handler(async ({ params, auth }) => {
       const id = getAtMe(auth, params.id);
-      auth.check((c) => c.isUser(id));
+      auth.check((c) => c.isUser(id) || c.hasPerm('READ:/user/{id}', { id }));
       const isSelf = auth.checkers.isUser(id);
       const user = await prisma.user.findUnique({
         where: {
@@ -97,7 +101,7 @@ export const usersRouter = makeRouter((app) => {
       },
     },
     handler(async ({ query, auth }) => {
-      // auth.check((c) => c.hasRole(roles.Super));
+      auth.check((c) => c.hasPerm('READ:/user'));
 
       const totalUsers = await prisma.user.count();
       const users = await prisma.user.findMany({

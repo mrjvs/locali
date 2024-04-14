@@ -1,5 +1,9 @@
 import type { FastifyRequest } from 'fastify';
 import { StatusError } from '../error';
+import {
+  checkPermissions,
+  resolvePermissionWithContext,
+} from '../perms/resolve';
 import { fetchSessionAndUpdateExpiry } from './session';
 import type { PopulatedSession } from './session';
 import { hasAuthorizationToken, parseAuthToken } from './tokens';
@@ -10,6 +14,7 @@ export interface AuthChecks {
   isAuthenticated: () => boolean;
   isAuthType: (type: AuthType) => boolean;
   isUser: (userId: string) => boolean;
+  hasPerm: (perm: string, context?: Record<string, string>) => boolean;
 }
 
 export interface AuthContext {
@@ -49,6 +54,10 @@ export async function fetchAuthContextData(
 
 function makeAuthCheckers(data: AuthContextData): AuthChecks {
   const userId = data.session?.userId;
+  // TODO resolve permissions:
+  // - add computed permission from roles
+  // - add computed permissions for all users
+  const perms: string[] = [];
 
   return {
     isAuthenticated() {
@@ -59,6 +68,13 @@ function makeAuthCheckers(data: AuthContextData): AuthChecks {
     },
     isUser(checkedUserId) {
       return userId === checkedUserId;
+    },
+    hasPerm(perm, context) {
+      const actionable = resolvePermissionWithContext(perm, context);
+      const hasPermission = perms.some((userPerm) =>
+        checkPermissions(actionable, userPerm),
+      );
+      return hasPermission;
     },
   };
 }
