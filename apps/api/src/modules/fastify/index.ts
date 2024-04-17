@@ -6,7 +6,7 @@ import {
   validatorCompiler,
 } from 'fastify-type-provider-zod';
 import { ZodError } from 'zod';
-import fastifySwagger from '@fastify/swagger';
+import { fastifySwagger } from '@fastify/swagger';
 import { conf, version } from '@/config';
 import { isStatusError } from '@/utils/error';
 import { logger } from '../log';

@@ -16,6 +16,7 @@ export const rolePerms: Record<Roles, string[]> = {
   'app:support': ['LIST:/user', 'READ:/user/*', 'LIST:/organisation'],
   'org:admin': [
     'DELETE:/organisation/{org}',
+    'LIST:/organisation/{org}/projects',
     'CREATE:/organisation/{org}/projects',
     'READ:/organisation/{org}/projects/*',
     'DELETE:/organisation/{org}/projects/*',
