@@ -3,8 +3,11 @@ import { typeidUnboxed } from 'typeid-js';
 
 const types = [
   'usr', // user
-  'org', // organisation
   'ses', // user session
+  'org', // organisation
+  'orgmbr', // organisation member
+  'prj', // project
+  'prjmbr', // project member
 ] as const;
 
 export function getId(prefix: ArrayValues<typeof types>): string {

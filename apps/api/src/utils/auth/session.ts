@@ -1,12 +1,21 @@
-import type { User, UserSession } from '@prisma/client';
+import type {
+  OrgMember,
+  Project,
+  ProjectMember,
+  User,
+  UserSession,
+} from '@prisma/client';
 import { prisma } from '@/modules/prisma';
-import { getId } from '../getId';
+import { getId } from '../get-id';
 import { makeAuthToken } from './tokens';
 
 const expiryInMs = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 export type PopulatedSession = UserSession & {
-  user: User;
+  user: User & {
+    orgMembers: OrgMember[];
+    projectMembers: (ProjectMember & { project: Project })[];
+  };
 };
 
 export async function fetchSessionAndUpdateExpiry(
@@ -24,7 +33,16 @@ export async function fetchSessionAndUpdateExpiry(
         expiresAt: new Date(Date.now() + expiryInMs), // new expiry date = NOW + expiry delay
       },
       include: {
-        user: true,
+        user: {
+          include: {
+            orgMembers: true,
+            projectMembers: {
+              include: {
+                project: true,
+              },
+            },
+          },
+        },
       },
     });
     return session;

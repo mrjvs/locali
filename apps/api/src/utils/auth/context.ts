@@ -4,6 +4,8 @@ import {
   checkPermissions,
   resolvePermissionWithContext,
 } from '../perms/resolve';
+import { resolveAppRoles, resolveRolesForUser } from '../perms/resolve-roles';
+import { basePerms } from '../perms/role-perms';
 import { fetchSessionAndUpdateExpiry } from './session';
 import type { PopulatedSession } from './session';
 import { hasAuthorizationToken, parseAuthToken } from './tokens';
@@ -54,10 +56,10 @@ export async function fetchAuthContextData(
 
 function makeAuthCheckers(data: AuthContextData): AuthChecks {
   const userId = data.session?.userId;
-  // TODO resolve permissions:
-  // - add computed permission from roles
-  // - add computed permissions for all users
-  const perms: string[] = [];
+  const perms: string[] = data.session
+    ? resolveRolesForUser(data.session.user)
+    : basePerms;
+  console.log(perms);
 
   return {
     isAuthenticated() {

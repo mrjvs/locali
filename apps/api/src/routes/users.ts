@@ -8,7 +8,7 @@ import { NotFoundError } from '@/utils/error';
 import { handler } from '@/utils/handle';
 import { mapPage, pagerSchema } from '@/utils/pages';
 import { makeRouter } from '@/utils/routes';
-import { getId } from '@/utils/getId';
+import { getId } from '@/utils/get-id';
 
 function getAtMe(auth: AuthContext, id: string) {
   if (id === '@me') return auth.data.getUserIdOrDefault() ?? id;

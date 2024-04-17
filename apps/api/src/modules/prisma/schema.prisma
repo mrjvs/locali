@@ -13,7 +13,11 @@ model User {
 
   passwordHash String        @map("password_hash")
   email        String        @unique
+  roles        String[]      @default([])
   sessions     UserSession[]
+
+  orgMembers    OrgMember[]
+  projectMembers ProjectMember[]
 
   @@map("user")
 }
@@ -34,5 +38,48 @@ model Organisation {
 
   name String
 
+  projects Project[]
+  members  OrgMember[]
+
   @@map("organisation")
+}
+
+model OrgMember {
+  id        String   @id
+  createdAt DateTime @default(now()) @map("created_at")
+
+  org    Organisation @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  orgId  String       @map("org_id")
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String       @map("user_id")
+
+  roles String[] @default([])
+
+  @@map("org_member")
+}
+
+model Project {
+  id        String       @id
+  createdAt DateTime     @default(now()) @map("created_at")
+  org       Organisation @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  orgId     String       @map("org_id")
+
+  name    String
+  members ProjectMember[]
+
+  @@map("project")
+}
+
+model ProjectMember {
+  id        String   @id
+  createdAt DateTime @default(now()) @map("created_at")
+
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String  @map("project_id")
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String  @map("user_id")
+
+  roles String[] @default([])
+
+  @@map("project_member")
 }

@@ -1,15 +1,30 @@
-import { getId } from '@/utils/getId';
+import { getId } from '@/utils/get-id';
 import { hashPassword } from '@/utils/auth/pass';
+import { appRoles } from '@/utils/perms/roles';
 import { prisma } from '..';
+
+export const admin = {
+  id: getId('usr'),
+  email: 'admin@lcl.dev',
+  password: 'test',
+};
 
 export const userA = {
   id: getId('usr'),
-  email: 'john@example.com',
+  email: 'john@lcl.dev',
   password: 'test',
 };
 
 export async function seedUsers() {
-  prisma.user.create({
+  await prisma.user.create({
+    data: {
+      id: admin.id,
+      email: admin.email,
+      passwordHash: await hashPassword(admin.password),
+      roles: [appRoles.admin],
+    },
+  });
+  await prisma.user.create({
     data: {
       id: userA.id,
       email: userA.email,

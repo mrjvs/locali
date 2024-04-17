@@ -1,8 +1,10 @@
 const wildcard = '*';
 
+export type PermissionContext = Record<string, string | null | undefined>;
+
 export function resolvePermissionWithContext(
   perm: string,
-  context?: Record<string, string | null | undefined>,
+  context?: PermissionContext,
 ) {
   return perm.replace(/\{(?<var>[a-zA-Z]+)\}/g, (_, variable) => {
     const value = context?.[variable];
