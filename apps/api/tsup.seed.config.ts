@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  name: 'locali',
-  entry: ['src/main.ts'],
+  name: 'seeder',
+  entry: ['src/modules/prisma/seed.ts'],
   format: 'esm',
 });

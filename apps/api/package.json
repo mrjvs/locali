@@ -12,12 +12,13 @@
   "prettier": "@repo/prettier-config",
   "prisma": {
     "schema": "./src/modules/prisma/schema.prisma",
-    "seed": "tsup && node dist/modules/prisma/seed.js"
+    "seed": "pnpm run seed"
   },
   "scripts": {
     "start": "node dist/main.js",
     "build": "tsup",
     "dev": "tsup --watch --onSuccess 'node dist/main.js'",
+    "seed": "tsup --config tsup.seed.config.ts --onSuccess 'node dist/modules/prisma/seed.js'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "vitest run",
@@ -38,6 +39,7 @@
     "@fastify/swagger": "^8.14.0",
     "@prisma/client": "^5.12.1",
     "argon2": "^0.40.1",
+    "cross-env": "^7.0.3",
     "fastify": "^4.26.2",
     "fastify-type-provider-zod": "^1.1.9",
     "jsonwebtoken": "^9.0.2",

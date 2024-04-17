@@ -20,4 +20,5 @@ docker compose up -d
 ## Command cheatsheet
 
 - `npx prisma migrate dev` - run migrations or create one
+- `npx prisma migrate reset` - reset database with seeding
 - `pnpm dev` - run the development server
