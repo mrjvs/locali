@@ -19,7 +19,9 @@
     "build": "tsup",
     "dev": "tsup --watch --onSuccess 'node dist/main.js'",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

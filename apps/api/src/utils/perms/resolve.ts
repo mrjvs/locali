@@ -1,14 +1,12 @@
 const wildcard = '*';
 
-// TODO unit test the shit out of this file
-
 export function resolvePermissionWithContext(
   perm: string,
-  context?: Record<string, string>,
+  context?: Record<string, string | null | undefined>,
 ) {
-  return perm.replace(/\{(?<var>[a-zA-Z])\}/g, (_, variable) => {
+  return perm.replace(/\{(?<var>[a-zA-Z]+)\}/g, (_, variable) => {
     const value = context?.[variable];
-    if (!value)
+    if (value === undefined || value === null)
       throw new Error(
         `Variable ${variable} in perm ${perm} doesnt exist in context`,
       );
@@ -22,8 +20,8 @@ type Permission = {
 };
 
 export function parsePermission(perm: string): Permission {
-  const [action, resourceString] = perm.split(':', 2);
-  const resourceStringWithoutPrefix = resourceString.toUpperCase().slice(1);
+  const [action, ...resourceStringRest] = perm.split(':');
+  const resourceStringWithoutPrefix = resourceStringRest.join(':').slice(1);
   return {
     action: action.toUpperCase(),
     resources: resourceStringWithoutPrefix.split('/'),
