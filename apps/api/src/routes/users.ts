@@ -26,7 +26,8 @@ export const usersRouter = makeRouter((app) => {
         }),
       },
     },
-    handler(async ({ body }) => {
+    handler(async ({ body, auth }) => {
+      auth.check((c) => c.hasPerm('CREATE:/user'));
       const newUser = await prisma.user.create({
         data: {
           id: getId('usr'),
@@ -101,7 +102,7 @@ export const usersRouter = makeRouter((app) => {
       },
     },
     handler(async ({ query, auth }) => {
-      auth.check((c) => c.hasPerm('READ:/user'));
+      auth.check((c) => c.hasPerm('LIST:/user'));
 
       const totalUsers = await prisma.user.count();
       const users = await prisma.user.findMany({
