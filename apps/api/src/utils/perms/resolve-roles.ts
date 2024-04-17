@@ -1,8 +1,6 @@
 import type { OrgMember, Project, ProjectMember, User } from '@prisma/client';
-import {
-  resolvePermissionWithContext,
-  type PermissionContext,
-} from './resolve';
+import type { PermissionContext } from '@repo/perms';
+import { resolvePermissionWithContext } from '@repo/perms';
 import { basePerms, baseUserPerms, rolePerms } from './role-perms';
 
 const rolePermsMap: Record<string, undefined | string[]> = rolePerms;

@@ -16,7 +16,7 @@ export function resolvePermissionWithContext(
   });
 }
 
-type Permission = {
+export type Permission = {
   resources: string[];
   action: string;
 };

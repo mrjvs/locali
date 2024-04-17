@@ -1,10 +1,11 @@
 import type { FastifyRequest } from 'fastify';
-import { StatusError } from '../error';
 import {
   checkPermissions,
   resolvePermissionWithContext,
-} from '../perms/resolve';
-import { resolveAppRoles, resolveRolesForUser } from '../perms/resolve-roles';
+  type PermissionContext,
+} from '@repo/perms';
+import { StatusError } from '../error';
+import { resolveRolesForUser } from '../perms/resolve-roles';
 import { basePerms } from '../perms/role-perms';
 import { fetchSessionAndUpdateExpiry } from './session';
 import type { PopulatedSession } from './session';
@@ -16,7 +17,7 @@ export interface AuthChecks {
   isAuthenticated: () => boolean;
   isAuthType: (type: AuthType) => boolean;
   isUser: (userId: string) => boolean;
-  hasPerm: (perm: string, context?: Record<string, string>) => boolean;
+  hasPerm: (perm: string, context?: PermissionContext) => boolean;
 }
 
 export interface AuthContext {
@@ -59,7 +60,6 @@ function makeAuthCheckers(data: AuthContextData): AuthChecks {
   const perms: string[] = data.session
     ? resolveRolesForUser(data.session.user)
     : basePerms;
-  console.log(perms);
 
   return {
     isAuthenticated() {
