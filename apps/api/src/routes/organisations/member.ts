@@ -23,7 +23,7 @@ export const organisationMemberRouter = makeRouter((app) => {
     },
     handler(async ({ body, auth, params }) => {
       auth.check((c) =>
-        c.hasPerm('CREATE:/organisation/{org}/members', { org: params.org }),
+        c.hasPerm('CREATE:/organisation/{org}/member', { org: params.org }),
       );
       const newMember = await prisma.orgMember.create({
         data: {
@@ -52,7 +52,7 @@ export const organisationMemberRouter = makeRouter((app) => {
     },
     handler(async ({ params, auth }) => {
       auth.check((c) =>
-        c.hasPerm('DELETE:/organisation/{org}/members/{id}', {
+        c.hasPerm('DELETE:/organisation/{org}/member/{id}', {
           org: params.org,
           id: params.id,
         }),
@@ -84,7 +84,7 @@ export const organisationMemberRouter = makeRouter((app) => {
     },
     handler(async ({ params, auth }) => {
       auth.check((c) =>
-        c.hasPerm('READ:/organisation/{org}/members/{id}', {
+        c.hasPerm('READ:/organisation/{org}/member/{id}', {
           org: params.org,
           id: params.id,
         }),
@@ -116,7 +116,7 @@ export const organisationMemberRouter = makeRouter((app) => {
     },
     handler(async ({ params, auth, query }) => {
       auth.check((c) =>
-        c.hasPerm('LIST:/organisation/{org}/members', { org: params.org }),
+        c.hasPerm('LIST:/organisation/{org}/member', { org: params.org }),
       );
 
       const totalMembers = await prisma.orgMember.count();

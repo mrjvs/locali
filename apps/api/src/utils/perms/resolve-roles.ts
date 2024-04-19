@@ -48,7 +48,7 @@ export function resolveProjectRoles(
 
 type PopulatedOrgMember = OrgMember;
 type PopulatedProjectMember = ProjectMember & { project: Project };
-type PopulatedUser = User & {
+export type PopulatedUser = User & {
   orgMembers: PopulatedOrgMember[];
   projectMembers: PopulatedProjectMember[];
 };

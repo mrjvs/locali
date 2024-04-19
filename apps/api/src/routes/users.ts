@@ -35,6 +35,14 @@ export const usersRouter = makeRouter((app) => {
           email: body.email,
           passwordHash: await hashPassword(body.password),
         },
+        include: {
+          orgMembers: true,
+          projectMembers: {
+            include: {
+              project: true,
+            },
+          },
+        },
       });
       const session = await createSession(newUser);
       return {
@@ -90,6 +98,14 @@ export const usersRouter = makeRouter((app) => {
       const user = await prisma.user.findUnique({
         where: {
           id,
+        },
+        include: {
+          orgMembers: true,
+          projectMembers: {
+            include: {
+              project: true,
+            },
+          },
         },
       });
       if (!user) throw new NotFoundError();

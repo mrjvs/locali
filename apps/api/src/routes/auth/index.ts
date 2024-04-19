@@ -24,6 +24,14 @@ export const authRouter = makeRouter((app) => {
         where: {
           email: body.email,
         },
+        include: {
+          orgMembers: true,
+          projectMembers: {
+            include: {
+              project: true,
+            },
+          },
+        },
       });
       if (!user) throw new StatusError('invalid input', 400);
       if (!(await verifyPassword(user.passwordHash, body.password)))

@@ -23,7 +23,7 @@ export const projectRouter = makeRouter((app) => {
     },
     handler(async ({ body, auth, params }) => {
       auth.check((c) =>
-        c.hasPerm('CREATE:/organisation/{org}/projects', { org: params.id }),
+        c.hasPerm('CREATE:/organisation/{org}/project', { org: params.id }),
       );
       const newProject = await prisma.project.create({
         data: {
@@ -54,7 +54,7 @@ export const projectRouter = makeRouter((app) => {
       });
       if (!project) throw new NotFoundError();
       auth.check((c) =>
-        c.hasPerm('DELETE:/organisation/{org}/projects/{proj}', {
+        c.hasPerm('DELETE:/organisation/{org}/project/{proj}', {
           org: project.orgId,
           proj: project.id,
         }),
@@ -89,7 +89,7 @@ export const projectRouter = makeRouter((app) => {
       });
       if (!project) throw new NotFoundError();
       auth.check((c) =>
-        c.hasPerm('READ:/organisation/{org}/projects/{proj}', {
+        c.hasPerm('READ:/organisation/{org}/project/{proj}', {
           org: project.orgId,
           proj: project.id,
         }),
@@ -111,7 +111,7 @@ export const projectRouter = makeRouter((app) => {
     },
     handler(async ({ query, auth, params }) => {
       auth.check((c) =>
-        c.hasPerm('LIST:/organisation/{org}/projects', { org: params.id }),
+        c.hasPerm('LIST:/organisation/{org}/project', { org: params.id }),
       );
 
       const total = await prisma.project.count({
