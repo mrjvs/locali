@@ -12,6 +12,7 @@ export const authRouter = makeRouter((app) => {
     '/api/v1/auth/login',
     {
       schema: {
+        description: 'Login user',
         body: z.object({
           email: z.string().min(1),
           password: z.string().min(1),
@@ -38,6 +39,11 @@ export const authRouter = makeRouter((app) => {
 
   app.post(
     '/api/v1/auth/logout',
+    {
+      schema: {
+        description: 'Logout user',
+      },
+    },
     handler(async ({ auth }) => {
       auth.check((c) => c.isAuthType('session'));
       const id = auth.data.getSession().id;

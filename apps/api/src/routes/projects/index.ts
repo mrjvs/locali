@@ -12,6 +12,7 @@ export const projectRouter = makeRouter((app) => {
     '/api/v1/organisations/:id/projects',
     {
       schema: {
+        description: 'Create project',
         params: z.object({
           id: z.string(),
         }),
@@ -39,6 +40,7 @@ export const projectRouter = makeRouter((app) => {
     '/api/v1/projects/:id',
     {
       schema: {
+        description: 'Delete project',
         params: z.object({
           id: z.string(),
         }),
@@ -73,6 +75,7 @@ export const projectRouter = makeRouter((app) => {
     '/api/v1/projects/:id',
     {
       schema: {
+        description: 'Get project',
         params: z.object({
           id: z.string(),
         }),
@@ -99,6 +102,7 @@ export const projectRouter = makeRouter((app) => {
     '/api/v1/organisations/:id/projects',
     {
       schema: {
+        description: 'List organisation projects',
         querystring: pagerSchema(),
         params: z.object({
           id: z.string(),

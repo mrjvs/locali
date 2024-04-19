@@ -13,6 +13,7 @@ export const organisationRouter = makeRouter((app) => {
     '/api/v1/organisations',
     {
       schema: {
+        description: 'Create organisation',
         body: z.object({
           name: z.string().min(1),
         }),
@@ -41,6 +42,7 @@ export const organisationRouter = makeRouter((app) => {
     '/api/v1/organisations/:id',
     {
       schema: {
+        description: 'Delete organisation',
         params: z.object({
           id: z.string(),
         }),
@@ -67,6 +69,7 @@ export const organisationRouter = makeRouter((app) => {
     '/api/v1/organisations/:id',
     {
       schema: {
+        description: 'Get organisation',
         params: z.object({
           id: z.string(),
         }),
@@ -87,6 +90,7 @@ export const organisationRouter = makeRouter((app) => {
     '/api/v1/organisations',
     {
       schema: {
+        description: 'List organisations',
         querystring: pagerSchema(),
       },
     },

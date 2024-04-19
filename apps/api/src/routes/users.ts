@@ -20,6 +20,7 @@ export const usersRouter = makeRouter((app) => {
     '/api/v1/users',
     {
       schema: {
+        description: 'Create user',
         body: z.object({
           email: z.string().min(1),
           password: z.string().min(1),
@@ -47,6 +48,7 @@ export const usersRouter = makeRouter((app) => {
     '/api/v1/users/:id',
     {
       schema: {
+        description: 'Delete user',
         params: z.object({
           id: z.string(),
         }),
@@ -75,6 +77,7 @@ export const usersRouter = makeRouter((app) => {
     '/api/v1/users/:id',
     {
       schema: {
+        description: 'Get user',
         params: z.object({
           id: z.string(),
         }),
@@ -98,6 +101,7 @@ export const usersRouter = makeRouter((app) => {
     '/api/v1/users',
     {
       schema: {
+        description: 'List users',
         querystring: pagerSchema(),
       },
     },
