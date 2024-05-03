@@ -1,4 +1,4 @@
-import { zodCoercedBoolean } from 'neat-config';
+import { zodCoercedBoolean } from '@neato/config';
 import { z } from 'zod';
 
 export const configSchema = z.object({

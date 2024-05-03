@@ -1,4 +1,4 @@
-import { createConfigLoader } from 'neat-config';
+import { createConfigLoader } from '@neato/config';
 import { configSchema } from '@/config/schema';
 import { fragments } from './fragments';
 

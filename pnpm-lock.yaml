@@ -33,6 +33,9 @@ importers:
       '@fastify/swagger':
         specifier: ^8.14.0
         version: 8.14.0
+      '@neato/config':
+        specifier: ^3.0.0
+        version: 3.0.0
       '@prisma/client':
         specifier: ^5.12.1
         version: 5.12.1(prisma@5.12.1)
@@ -54,9 +57,6 @@ importers:
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
-      neat-config:
-        specifier: ^3.0.0
-        version: 3.0.0
       pino:
         specifier: ^8.20.0
         version: 8.20.0
@@ -1201,6 +1201,15 @@ packages:
   /@microsoft/tsdoc@0.14.2:
     resolution: {integrity: sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==}
     dev: true
+
+  /@neato/config@3.0.0:
+    resolution: {integrity: sha512-K+YDuvt5EgQEwhwI1UI8zTXVUc+iFfTe7OzjHza96HEDYP/XsEQrwLj31VSaesVDSgxkepRczen1Lzt+zCROGA==}
+    dependencies:
+      chalk: 4.1.2
+      dotenv: 16.4.5
+      joi: 17.13.1
+      zod: 3.22.4
+    dev: false
 
   /@netlify/functions@2.6.0:
     resolution: {integrity: sha512-vU20tij0fb4nRGACqb+5SQvKd50JYyTyEhQetCMHdakcJFzjLDivvRR16u1G2Oy4A7xNAtGJF1uz8reeOtTVcQ==}
@@ -6202,8 +6211,8 @@ packages:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
     dev: true
 
-  /joi@17.12.3:
-    resolution: {integrity: sha512-2RRziagf555owrm9IRVtdKynOBeITiDpuZqIpgwqXShPncPKNiRQoiGsl/T8SQdq+8ugRzH2LqY67irr2y/d+g==}
+  /joi@17.13.1:
+    resolution: {integrity: sha512-vaBlIKCyo4FCUtCm7Eu4QZd/q02bWcxfUO6YSXAZOWF6gzcLBeba8kwotUdYJjDLW8Cz8RywsSOqiNJZW0mNvg==}
     dependencies:
       '@hapi/hoek': 9.3.0
       '@hapi/topo': 5.1.0
@@ -6852,15 +6861,6 @@ packages:
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
-
-  /neat-config@3.0.0:
-    resolution: {integrity: sha512-ODBmPcVy2ZdQgwyp5vQ8uN5Af01MKCYHI/Rl0Vni5136RS1nbMnZwjtgSHDszDRtQBwg10Xxp5mY6y53uqA1Gw==}
-    dependencies:
-      chalk: 4.1.2
-      dotenv: 16.4.5
-      joi: 17.12.3
-      zod: 3.22.4
-    dev: false
 
   /negotiator@0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
