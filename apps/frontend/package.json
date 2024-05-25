@@ -19,7 +19,8 @@
     "pinia": "^2.1.7",
     "tailwind-variants": "^0.2.1",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.3",
