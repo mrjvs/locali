@@ -10,11 +10,19 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "@nuxtjs/tailwindcss": "^6.12.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
     "nuxt": "^3.11.2",
+    "nuxt-svgo": "^4.0.1",
     "pinia": "^2.1.7",
+    "tailwind-variants": "^0.2.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-themer": "^4.0.0"
   }
 }
