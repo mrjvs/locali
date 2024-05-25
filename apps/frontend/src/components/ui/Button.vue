@@ -1,8 +1,9 @@
 <template>
-  <NuxtLink v-if="props.to" :class="c({
+  <NuxtLink v-if="props.to" :to="props.to" :class="c({
     align: props.align,
     type: props.type,
     disabled: props.disabled,
+    size: props.size,
   })" @click="click">
     <slot />
   </NuxtLink>
@@ -10,6 +11,7 @@
     align: props.align,
     type: props.type,
     disabled: props.disabled,
+    size: props.size,
   })"
     @click="click"
     >
@@ -21,15 +23,19 @@
 import { tv } from 'tailwind-variants';
 
 const c = tv({
-  base: 'rounded-md py-2 px-5 border',
+  base: 'rounded-xl border-2 cursor-pointer',
   variants: {
     align: {
       stretch: 'w-full',
       hug: '',
     },
     type: {
-      primary: '',
+      primary: 'bg-gradient-to-b border-primaryLighter from-primaryLighter to-primary hover:from-primary hover:border-primary hover:to-primaryDarker transition-[background,border-color,transform] text-primaryContrast active:scale-105',
       secondary: '',
+    },
+    size: {
+      wide: 'py-2 px-12',
+      normal: 'py-2 px-5',
     },
     disabled: {
       true: 'text-opacity-25 opacity-75 pointer-events-none',
@@ -38,12 +44,14 @@ const c = tv({
   defaultVariants: {
     align: 'hug',
     type: 'primary',
+    size: 'normal'
   }
 })
 
 const props = defineProps<{
   align?: 'stretch' | 'hug';
   type?: "primary" | "secondary";
+  size?: "wide" | "normal";
   to?: string;
   disabled?: boolean;
   pending?: boolean;

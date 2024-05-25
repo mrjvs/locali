@@ -57,8 +57,14 @@ const baseColorTheme = {
   text: colors.neutral.c600,
   card: colors.neutral.c50,
   cardStroke: colors.neutral.c200,
+  shadowColor: 'black',
+  inputBorder: colors.neutral.c300,
+
+  // these colors are for dynamic themed elements
+  primaryLighter: colors.accent.c200,
   primary: colors.accent.c300,
-  shadowColor: 'black'
+  primaryDarker: colors.accent.c400,
+  primaryContrast: colors.neutral.c50,
 }
 
 export default {
@@ -73,6 +79,7 @@ export default {
     colors: baseColorTheme,
     boxShadow: {
       'sm': '0 2px 4px rgba(0, 0, 0, 0.05)',
+      'input': '0 1px 2px rgba(0, 0, 0, 0.06)',
     },
   },
   plugins: [themer({
@@ -87,10 +94,15 @@ export default {
         bg: colors.neutralDark.c800,
         bold: colors.neutralDark.c50,
         text: colors.neutralDark.c200,
-        primary: colors.accent.c200,
         card: colors.neutralDark.c700,
-        cardStroke: colors.neutral.c600,
+        cardStroke: colors.neutralDark.c600,
         shadowColor: 'transparent',
+        inputBorder: colors.neutralDark.c600,
+
+        primaryLighter: colors.accent.c300,
+        primary: colors.accent.c200,
+        primaryDarker: colors.accent.c100,
+        primaryContrast: colors.neutralDark.c50,
       })
     ]
   })]
