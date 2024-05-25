@@ -10,8 +10,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      docsUrl: 'http://google.com',
-      aboutUrl: 'http://google.com',
+      docsUrl: 'https://github.com/mrjvs/locali',
+      aboutUrl: 'https://github.com/mrjvs/locali',
       apiBaseUrl: "http://localhost:8080"
     }
   },
