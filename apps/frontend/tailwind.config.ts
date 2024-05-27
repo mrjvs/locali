@@ -48,6 +48,9 @@ const colors = {
     c300: '#272B47',
     c200: '#595E84',
     c100: '#ACA5CA'
+  },
+  semantic: {
+    error: '#ED4040',
   }
 }
 
@@ -59,6 +62,7 @@ const baseColorTheme = {
   cardStroke: colors.neutral.c200,
   shadowColor: 'black',
   inputBorder: colors.neutral.c300,
+  error: colors.semantic.error,
 
   // these colors are for dynamic themed elements
   primaryLighter: colors.accent.c200,
@@ -98,6 +102,7 @@ export default {
         cardStroke: colors.neutralDark.c600,
         shadowColor: 'transparent',
         inputBorder: colors.neutralDark.c600,
+        error: colors.semantic.error,
 
         primaryLighter: colors.accent.c300,
         primary: colors.accent.c200,
