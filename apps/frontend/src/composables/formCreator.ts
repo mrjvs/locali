@@ -29,11 +29,11 @@ export type FormError = {
 }
 
 export type FormErrorInsert = {
-  validationErrors: Array<{
+  validationErrors?: Array<{
     text: string;
     id: string;
   }>;
-  formErrors: Array<{
+  formErrors?: Array<{
     text: string;
   }>;
 }
@@ -125,14 +125,14 @@ export function createFormComposable<TSchema extends AnyZodObject>(ops: FormOpti
         return readOnlyFormErrors.value;
       },
       insert(insertErrors) {
-        if (insertErrors.validationErrors.length > 0) {
+        if (insertErrors.validationErrors && insertErrors.validationErrors.length > 0) {
           insertErrors.validationErrors.forEach(err => {
             errors.value[err.id] = err.text;
           })
           ops.plugins?.forEach(p => p.onValidationError?.(controls));
         }
 
-        if (insertErrors.formErrors.length > 0) {
+        if (insertErrors.formErrors && insertErrors.formErrors.length > 0) {
           insertErrors.formErrors.forEach(err => {
             formErrors.value.push(err.text);
           })

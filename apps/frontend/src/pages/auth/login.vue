@@ -43,6 +43,13 @@ const loginAction = useAction({
   async action() {
     const res = form.validate();
     if (!res.success) return;
+    if (res.data.password === "test") {
+      form.errors.insert({
+        formErrors: [{
+          text: "Wrong password!",
+        }]
+      })
+    }
     console.log("Logging in", res.data)
   },
 });
