@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-4 inset-x-0 pointer-events-none flex flex-col items-center">
+  <div class="fixed bottom-4 inset-x-4 pointer-events-none flex flex-col items-center">
     <LclTransition animation="slide-from-bottom-fade-out" group>
       <div v-for="t of showingToasts" :key="t.id" class="mt-4 pointer-events-auto">
         <Toast :toast="t.toast" />
