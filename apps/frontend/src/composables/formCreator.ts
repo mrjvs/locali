@@ -15,7 +15,10 @@ export type FormValidateResult<TOutput> = {
 }
 
 export type FormPlugin<TOutput = any> = {
-  onAfterError?: (form: FormControls<TOutput>) => void;
+  onValidationError?: (form: FormControls<TOutput>) => void;
+  onValidationSuccess?: (form: FormControls<TOutput>) => void;
+  onClearErrors?: (form: FormControls<TOutput>) => void;
+  onReset?: (form: FormControls<TOutput>) => void;
 }
 
 export type FormError = {
@@ -44,11 +47,14 @@ export function createFormComposable<TSchema extends AnyZodObject>(ops: FormOpti
   const errors = ref<Record<string, string | undefined>>({});
   const readOnlyErrors = readonly(errors);
 
-  return {
+
+
+  const controls: FormControls<z.infer<TSchema>> = {
     id: ops.id,
     reset() {
       data.value = ops.init();
       errors.value = {};
+      ops.plugins?.forEach(p => p.onReset?.(controls));
     },
     error(key) {
       const err = errors.value[key];
@@ -68,9 +74,11 @@ export function createFormComposable<TSchema extends AnyZodObject>(ops: FormOpti
         Object.entries(parsed.error.flatten().fieldErrors).forEach(e => {
           if (e[1]) errors.value[e[0]] = e[1][0];
         });
-        ops.plugins?.forEach(p => p.onAfterError?.(this));
+        ops.plugins?.forEach(p => p.onValidationError?.(controls));
         return { success: false };
       }
+
+      ops.plugins?.forEach(p => p.onValidationSuccess?.(controls));
       return {
         success: true,
         data: parsed.data,
@@ -82,6 +90,7 @@ export function createFormComposable<TSchema extends AnyZodObject>(ops: FormOpti
     errors: {
       clear() {
         errors.value = {};
+        ops.plugins?.forEach(p => p.onClearErrors?.(controls));
       },
       all() {
         return readOnlyErrors.value;
@@ -91,11 +100,15 @@ export function createFormComposable<TSchema extends AnyZodObject>(ops: FormOpti
           err.forEach(e => {
             errors.value[e.id] = e.text;
           })
+          ops.plugins?.forEach(p => p.onValidationError?.(controls));
           return;
         }
 
         errors.value[err.id] = err.text;
+        ops.plugins?.forEach(p => p.onValidationError?.(controls));
       },
     }
   }
+
+  return controls;
 }

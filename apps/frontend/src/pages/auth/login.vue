@@ -26,10 +26,9 @@ definePageMeta({
   layout: 'noauth',
 })
 
-const toasts = useToasts();
-
 const form = useForm({
   id: 'login',
+  showValidationToast: true,
   init: () => ({
     email: '',
     password: '',
@@ -42,16 +41,6 @@ const form = useForm({
 
 const loginAction = useAction({
   async action() {
-    toasts.show({
-      type: "error",
-      title: "Not all fields are correct",
-      description: "Please go back and correct them",
-      button: "Show me",
-      hideAfterSeconds: 5,
-      onClick() {
-        form.reset();
-      },
-    })
     const res = form.validate();
     if (!res.success) return;
     console.log("Logging in", res.data)

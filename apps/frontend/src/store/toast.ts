@@ -25,7 +25,7 @@ export const useToasts = defineStore('toast', () => {
   function show(toast: Toast) {
     const id = idNum.value++;
     if (toast.replaceGroup)
-      toasts.value = toasts.value.filter(v=>v.toast.replaceGroup !== toast.replaceGroup)
+      clearGroup(toast.replaceGroup);
     toasts.value.push({
       id,
       state: "showing",
@@ -63,10 +63,24 @@ export const useToasts = defineStore('toast', () => {
     })
   }
 
+  function clearGroup(replaceGroup: string) {
+    toasts.value = toasts.value.map(v => {
+      if (v.toast.replaceGroup === replaceGroup) {
+        v.state = 'hiding';
+        setTimeout(() => {
+          remove(v.id);
+        }, 10 * 1000); // assume animation is finished after 10 seconds
+        return v;
+      }
+      return v;
+    });
+  }
+
   return {
     all: readonlyToasts,
     show,
     hide,
-    clear
+    clear,
+    clearGroup,
   }
 });
