@@ -106,6 +106,7 @@ export default {
         inputBorder: colors.neutralDark.c600,
         error: colors.semantic.error,
         errorContrast: 'white',
+        black: 'black',
 
         primaryLighter: colors.accent.c300,
         primary: colors.accent.c200,
