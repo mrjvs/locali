@@ -26,6 +26,8 @@ definePageMeta({
   layout: 'noauth',
 })
 
+const toasts = useToasts();
+
 const form = useForm({
   id: 'login',
   init: () => ({
@@ -40,6 +42,16 @@ const form = useForm({
 
 const loginAction = useAction({
   async action() {
+    toasts.show({
+      type: "error",
+      title: "Hell0",
+      description: "world!",
+      button: "Reset form!",
+      hideAfterSeconds: 5,
+      onClick() {
+        form.reset();
+      },
+    })
     const res = form.validate();
     if (!res.success) return;
     console.log("Logging in", res.data)

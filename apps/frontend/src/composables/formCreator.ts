@@ -48,6 +48,7 @@ export function createFormComposable<TSchema extends AnyZodObject>(ops: FormOpti
     id: ops.id,
     reset() {
       data.value = ops.init();
+      errors.value = {};
     },
     error(key) {
       const err = errors.value[key];

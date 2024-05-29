@@ -12,6 +12,11 @@
     <Html dir="ltr" />
     <ClientOnly>
       <slot />
+      <ToastProvider />
     </ClientOnly>
   </div>
 </template>
+
+<script setup lang="ts">
+import ToastProvider from "~/components/partials/toasts/ToastProvider.vue"
+</script>
