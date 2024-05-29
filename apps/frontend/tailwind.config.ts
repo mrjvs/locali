@@ -61,8 +61,10 @@ const baseColorTheme = {
   card: colors.neutral.c50,
   cardStroke: colors.neutral.c200,
   shadowColor: 'black',
+  black: 'black',
   inputBorder: colors.neutral.c300,
   error: colors.semantic.error,
+  errorContrast: 'white',
 
   // these colors are for dynamic themed elements
   primaryLighter: colors.accent.c200,
@@ -103,6 +105,7 @@ export default {
         shadowColor: 'transparent',
         inputBorder: colors.neutralDark.c600,
         error: colors.semantic.error,
+        errorContrast: 'white',
 
         primaryLighter: colors.accent.c300,
         primary: colors.accent.c200,

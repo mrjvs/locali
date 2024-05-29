@@ -44,9 +44,9 @@ const loginAction = useAction({
   async action() {
     toasts.show({
       type: "error",
-      title: "Hell0",
-      description: "world!",
-      button: "Reset form!",
+      title: "Not all fields are correct",
+      description: "Please go back and correct them",
+      button: "Show me",
       hideAfterSeconds: 5,
       onClick() {
         form.reset();
