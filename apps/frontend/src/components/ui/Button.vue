@@ -5,7 +5,16 @@
     disabled: props.disabled,
     size: props.size,
   })" @click="click">
-    <slot />
+    <span :class="{
+      'opacity-0': props.pending,
+    }">
+      <slot />
+    </span>
+    <span v-if="props.pending" :class="{
+      'absolute inset-0 flex items-center justify-center': true,
+    }">
+      <Loading />
+    </span>
   </NuxtLink>
   <button v-else :class="c({
     align: props.align,
@@ -15,7 +24,16 @@
   })"
     @click="click"
     >
-    <slot />
+    <span :class="{
+      'opacity-0': props.pending,
+    }">
+      <slot />
+    </span>
+    <span v-if="props.pending" :class="{
+      'absolute inset-0 flex items-center justify-center': true,
+    }">
+      <Loading />
+    </span>
   </button>
 </template>
 
@@ -23,7 +41,7 @@
 import { tv } from 'tailwind-variants';
 
 const c = tv({
-  base: 'rounded-xl border-2 cursor-pointer',
+  base: 'rounded-xl border-2 cursor-pointer relative',
   variants: {
     align: {
       stretch: 'w-full',

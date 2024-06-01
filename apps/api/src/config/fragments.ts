@@ -6,6 +6,9 @@ type Fragment = PartialDeep<z.infer<typeof configSchema>>;
 
 export const fragments: Record<string, Fragment> = {
   docker: {
+    server: {
+      cors: 'http://localhost:3000',
+    },
     db: {
       connection: 'postgres://postgres:postgres@postgres:5432/postgres',
     },

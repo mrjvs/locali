@@ -26,6 +26,7 @@ export const useAuthStore = defineStore('auth', () => {
   const initialized = ref(false);
   const isAuthenticated = computed(() => !!userState.value);
   const token = computed(() => internal.token ?? null);
+  const user = readonly(userState);
 
   function populate(state: UserState) {
     userState.value = state;
@@ -35,6 +36,10 @@ export const useAuthStore = defineStore('auth', () => {
   function clear() {
     internal.token = null;
     userState.value = null;
+  }
+
+  function setToken(newToken: string) {
+    internal.token = newToken;
   }
 
   async function retrieve() {
@@ -62,6 +67,8 @@ export const useAuthStore = defineStore('auth', () => {
     populate,
     retrieve,
     clear,
+    setToken,
+    user,
     initialized: readonly(initialized),
   }
 });
