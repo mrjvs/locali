@@ -1,6 +1,7 @@
 import type { FormErrorInsert } from "~/composables/formCreator"
 import { FetchError } from "ofetch"
 import type { ApiErrorCodes as RealApiErrorCodes } from "@repo/perms";
+import type { ZodEffects, ZodError, ZodIssue } from "zod";
 
 type ApiErrorBase = {
   toFormError: () => FormErrorInsert;
@@ -9,7 +10,8 @@ type ApiErrorBase = {
 export type ApiError = ApiErrorBase & ({
   type: "validation",
   errors: Array<{
-    message: string;
+    id: string;
+    text: string;
   }>,
 } | {
   type: "message",
@@ -42,7 +44,7 @@ function getFormError(err: ApiError): FormErrorInsert {
       }],
     }
   return {
-    validationErrors: [], // TODO fix this
+    validationErrors: err.errors,
   }
 }
 
@@ -51,7 +53,10 @@ function parseApiErrorObject(input: Record<string, any>): ApiError {
   if (t === "validation")
     return {
       type: "validation",
-      errors: input.errors,
+      errors: (input.errors as ZodIssue[]).map(e => ({
+        id: e.path.join("."),
+        text: e.message,
+      })),
       toFormError() {
         return getFormError(this);
       }
