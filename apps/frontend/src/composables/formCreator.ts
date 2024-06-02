@@ -15,6 +15,7 @@ export type FormValidateResult<TOutput> = {
 }
 
 export type FormPlugin<TOutput = any> = {
+  setup?: (form: FormControls<TOutput>) => void;
   onValidationError?: (form: FormControls<TOutput>) => void;
   onFormError?: (form: FormControls<TOutput>) => void;
   onValidationSuccess?: (form: FormControls<TOutput>) => void;
@@ -141,6 +142,8 @@ export function createFormComposable<TSchema extends AnyZodObject>(ops: FormOpti
       },
     }
   }
+
+  ops.plugins?.forEach(p => p.setup?.(controls));
 
   return controls;
 }

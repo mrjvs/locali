@@ -47,6 +47,7 @@ definePageMeta({
 });
 
 const auth = useAuthStore();
+const router = useRouter();
 
 const form = useForm({
   id: "login",
@@ -70,12 +71,16 @@ const loginAction = useAction({
     if (!data.success) return;
     const res = await api(login(data.data));
     if (res.error) {
-      form.errors.insert(res.error.toFormError());
+      if (res.error.type === 'code' && res.error.code === 'authInvalidInput')
+        form.errors.insert({ validationErrors: [{ id: "email", text: "Email or password is incorrect" }] });
+      else
+        form.errors.insert(res.error.toFormError());
       return;
     }
 
     auth.setToken(res.data.token);
     await auth.retrieve();
+    router.push("/");
   },
 });
 </script>
