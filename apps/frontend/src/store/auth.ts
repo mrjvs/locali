@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { FetchError } from 'ofetch'
 import { persistedState } from '#imports'
 import { getCurrentUser, type ExpandedUserRes } from '~/services/api/auth';
 
@@ -55,8 +56,13 @@ export const useAuthStore = defineStore('auth', () => {
       })
       return;
     } catch (err) {
-      // TODO handle 403/401
-      console.error(err);
+      if (err instanceof FetchError) {
+        if (err.statusCode === 401 || err.statusCode === 403) {
+          clear();
+          return;
+        }
+      }
+      console.error("couldn't get current user", err);
       throw err;
     }
   }
