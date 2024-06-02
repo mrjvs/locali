@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-lg border border-cardStroke bg-card shadow-sm shadow-shadowColor/5" :class="c(props)">
+  <div :class="c(props)">
     <slot />
   </div>
 </template>
@@ -12,11 +12,19 @@ const c = tv({
     padding: {
       sm: 'p-4',
       md: 'p-8',
+    },
+    type: {
+      normal: 'rounded-lg border border-cardStroke bg-card shadow-sm shadow-shadowColor/5',
+      primary: 'rounded-lg bg-primaryBgDarker shadow-shadowColor/5'
     }
+  },
+  defaultVariants: {
+    type: 'normal',
   }
 })
 
 const props = defineProps<{
-  padding: "sm" | "md"
+  padding: "sm" | "md",
+  type?: "normal" | "primary"
 }>();
 </script>

@@ -11,14 +11,20 @@ const c = tv({
     size: {
       large: 'text-2xl font-heading font-extrabold',
       sub: 'text-lg font-sans font-bold',
+    },
+    color: {
+      normal: 'text-bold',
+      primary: 'text-primaryContrast',
     }
   },
   defaultVariants: {
     size: 'large',
+    color: 'normal',
   }
 })
 
 const props = defineProps<{
   size?: "large" | "sub",
+  color?: "primary" | "normal",
 }>();
 </script>

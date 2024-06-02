@@ -71,6 +71,9 @@ const baseColorTheme = {
   primary: colors.accent.c300,
   primaryDarker: colors.accent.c400,
   primaryContrast: colors.neutral.c50,
+  primaryBg: colors.accentDimmed.c400,
+  primaryBgSmallContrast: colors.accentDimmed.c100,
+  primaryBgDarker: colors.accentDimmed.c500,
 }
 
 export default {
@@ -112,6 +115,8 @@ export default {
         primary: colors.accent.c200,
         primaryDarker: colors.accent.c100,
         primaryContrast: colors.neutralDark.c50,
+        primaryBg: colors.accentDimmed.c400,
+        primaryBgDarker: colors.accentDimmed.c500,
       })
     ]
   })]
