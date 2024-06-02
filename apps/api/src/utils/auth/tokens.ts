@@ -2,7 +2,7 @@ import jwtLib, { type SignOptions } from 'jsonwebtoken';
 import type { FastifyRequest } from 'fastify';
 import { conf } from '@/config';
 import { logger } from '@/modules/log';
-import { StatusError } from '../error';
+import { ApiError } from '../error';
 
 const alg = 'HS256';
 
@@ -37,12 +37,12 @@ export function hasAuthorizationToken(request: FastifyRequest) {
   if (!authorization) return null;
   const headerParts: string[] = authorization.split(' ', 2);
   if (headerParts.length === 0 || headerParts[0] !== 'Bearer')
-    throw new StatusError('wrong auth method', 401);
+    throw ApiError.forMessage('Wrong auth header type', 401);
   return headerParts[1];
 }
 
 export function getAuthorizationToken(request: FastifyRequest) {
   const token = hasAuthorizationToken(request);
-  if (!token) throw new StatusError('header missing', 401);
+  if (!token) throw ApiError.forMessage('Auth header missing', 401);
   return token;
 }

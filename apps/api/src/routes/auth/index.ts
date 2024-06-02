@@ -3,7 +3,7 @@ import { prisma } from '@/modules/prisma';
 import { handler } from '@/utils/handle';
 import { makeRouter } from '@/utils/routes';
 import { verifyPassword } from '@/utils/auth/pass';
-import { NotFoundError, StatusError } from '@/utils/error';
+import { ApiError, NotFoundError } from '@/utils/error';
 import { createSession, makeSessionToken } from '@/utils/auth/session';
 import { mapExpandedUser } from '@/mappings/user';
 
@@ -33,9 +33,9 @@ export const authRouter = makeRouter((app) => {
           },
         },
       });
-      if (!user) throw new StatusError('invalid input', 400);
+      if (!user) throw ApiError.forCode('authInvalidInput', 400);
       if (!(await verifyPassword(user.passwordHash, body.password)))
-        throw new StatusError('invalid input', 400);
+        throw ApiError.forCode('authInvalidInput', 400);
 
       const session = await createSession(user);
       return {

@@ -9,6 +9,7 @@ export function makeErrorReporter(ops: ErrorReporterOptions): FormPlugin {
   }
   return {
     onValidationError(form) {
+      // TODO if not validation errors are shown in UI, show an error
       if (ops.reportValidationErrors) {
         toasts.show({
           type: "error",
@@ -27,7 +28,7 @@ export function makeErrorReporter(ops: ErrorReporterOptions): FormPlugin {
       toasts.show({
         type: "error",
         title: "Something went wrong",
-        description: "Try again later",
+        description: form.errors.formErrors()[0],
         hideAfterSeconds: 30,
         replaceGroup: `form::${form.id}::errors`,
       });

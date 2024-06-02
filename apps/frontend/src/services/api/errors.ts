@@ -1,5 +1,6 @@
 import type { FormErrorInsert } from "~/composables/formCreator"
 import { FetchError } from "ofetch"
+import type { ApiErrorCodes as RealApiErrorCodes } from "@repo/perms";
 
 type ApiErrorBase = {
   toFormError: () => FormErrorInsert;
@@ -18,16 +19,30 @@ export type ApiError = ApiErrorBase & ({
   code: ApiErrorCodes,
 })
 
-const apiErrorCodes = {
+const apiErrorCodes: Record<ApiErrorCodes | "unknown", string> = {
   "unknown": "Unknown error occured",
-} as const;
-export type ApiErrorCodes = keyof typeof apiErrorCodes;
+  authInvalidToken: "Invalid or expired auth token",
+  authMissingPermissions: "The user does not have access to this resource or action",
+  authInvalidInput: "Invalid credentials have been supplied",
+  notFound: "Resource could not be found",
+};
+export type ApiErrorCodes = RealApiErrorCodes | "unknown";
 
 function getFormError(err: ApiError): FormErrorInsert {
+  if (err.type === 'code')
+    return {
+      formErrors: [{
+        text: apiErrorCodes[err.code] ?? apiErrorCodes.unknown,
+      }],
+    }
+  if (err.type === 'message')
+    return {
+      formErrors: [{
+        text: err.message,
+      }],
+    }
   return {
-    formErrors: [{
-      text: "hello", // TODO finish this
-    }]
+    validationErrors: [], // TODO fix this
   }
 }
 

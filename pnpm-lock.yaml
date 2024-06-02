@@ -112,6 +112,9 @@ importers:
       '@pinia/nuxt':
         specifier: ^0.5.1
         version: 0.5.1(vue@3.4.23)
+      '@repo/perms':
+        specifier: workspace:^
+        version: link:../../packages/perms
       nuxt:
         specifier: ^3.11.2
         version: 3.11.2(@unocss/reset@0.59.4)(floating-vue@5.2.2)(unocss@0.59.4)(vite@5.2.9)

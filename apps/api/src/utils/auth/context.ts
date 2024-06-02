@@ -4,7 +4,7 @@ import {
   resolvePermissionWithContext,
   type PermissionContext,
 } from '@repo/perms';
-import { StatusError } from '../error';
+import { ApiError } from '../error';
 import { resolveRolesForUser } from '../perms/resolve-roles';
 import { basePerms } from '../perms/role-perms';
 import { fetchSessionAndUpdateExpiry } from './session';
@@ -42,7 +42,7 @@ export async function fetchAuthContextData(
   const jwt = token ?? hasAuthorizationToken(req);
   if (!jwt) return {};
   const payload = parseAuthToken(jwt);
-  if (!payload) throw new StatusError('Invalid auth token', 401);
+  if (!payload) throw ApiError.forCode('authInvalidToken', 401);
   if (payload?.t === 'session') {
     const session = await fetchSessionAndUpdateExpiry(payload.id);
     if (session) {
@@ -91,7 +91,7 @@ export async function makeAuthContext(
   return {
     check(cb) {
       const result = cb(checkers);
-      if (!result) throw new StatusError('Missing permissions', 403);
+      if (!result) throw ApiError.forCode('authMissingPermissions', 403);
     },
     checkers,
     data: {

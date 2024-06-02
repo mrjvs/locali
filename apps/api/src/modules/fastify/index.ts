@@ -8,7 +8,7 @@ import {
 import { ZodError } from 'zod';
 import { fastifySwagger } from '@fastify/swagger';
 import { conf, version } from '@/config';
-import { isStatusError } from '@/utils/error';
+import { isApiError } from '@/utils/error';
 import { logger } from '../log';
 import { setupRoutes } from './routes';
 
@@ -50,11 +50,18 @@ export async function setupFastify(): Promise<FastifyInstance> {
       return;
     }
 
-    if (isStatusError(err)) {
-      void reply.status(err.errorStatusCode).send({
-        errorType: 'message',
-        message: err.message,
-      });
+    if (isApiError(err)) {
+      if (err.errorCode) {
+        void reply.status(err.errorStatusCode).send({
+          errorType: 'code',
+          code: err.errorCode,
+        });
+      } else {
+        void reply.status(err.errorStatusCode).send({
+          errorType: 'message',
+          message: err.message,
+        });
+      }
       return;
     }
 
