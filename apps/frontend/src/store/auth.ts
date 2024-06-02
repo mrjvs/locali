@@ -67,6 +67,14 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  async function logout() {
+    try {
+      if (user.value) await logout();
+    } catch {}
+
+    clear();
+  }
+
   return {
     isAuthenticated,
     token,
@@ -74,6 +82,7 @@ export const useAuthStore = defineStore('auth', () => {
     retrieve,
     clear,
     setToken,
+    logout,
     user,
     initialized: readonly(initialized),
   }
