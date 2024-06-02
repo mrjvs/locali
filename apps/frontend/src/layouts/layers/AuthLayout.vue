@@ -4,11 +4,12 @@
       @pending="(val: boolean) => (pending = val)"
       @error="(val: unknown) => (error = val)"
     />
-    <div v-if="error">
-      <p>Failed to fetch user</p>
+    <div v-if="error" class="flex h-screen flex-col items-center justify-center text-error">
+      <IconAlert class="!mb-2 block" />
+      <p class="font-bold">Couldn't load account data</p>
     </div>
-    <div v-else-if="pending">
-      <p>Loading...</p>
+    <div v-else-if="pending" class="flex h-screen text-2xl text-primary items-center justify-center">
+      <Loading />
     </div>
 
     <AuthGuard v-else>

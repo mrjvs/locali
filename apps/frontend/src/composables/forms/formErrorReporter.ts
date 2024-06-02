@@ -19,7 +19,7 @@ export function makeErrorReporter(ops: ErrorReporterOptions): FormPlugin {
           persistent: true,
           replaceGroup: `form::${form.id}::errors`,
           onClick() {
-            alert('Scroll to a validation error')
+            alert('Scroll to a validation error') // TODO actually scroll
           },
         });
       }
