@@ -8,7 +8,7 @@ interface Check {
   success: boolean;
 }
 
-async function healtcheck(): Promise<Check[]> {
+async function healthcheck(): Promise<Check[]> {
   return [
     {
       name: 'prisma',
@@ -26,7 +26,7 @@ export const indexRouter = makeRouter((app) => {
       },
     },
     handler(async ({ res }) => {
-      const checks = await healtcheck();
+      const checks = await healthcheck();
       const isHealthy = checks.every((v) => v.success);
       void res.status(isHealthy ? 200 : 500);
       return {
