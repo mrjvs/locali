@@ -74,6 +74,7 @@ const baseColorTheme = {
   primaryBg: colors.accentDimmed.c400,
   primaryBgSmallContrast: colors.accentDimmed.c100,
   primaryBgDarker: colors.accentDimmed.c500,
+  primaryBgLighter: colors.accentDimmed.c300,
 }
 
 export default {
@@ -83,7 +84,7 @@ export default {
       fontFamily: {
         sans: ['"Source Sans 3"', 'Helvetica', 'Arial', 'sans-serif'],
         heading: ['"Manrope"', '"Source Sans 3"', 'Helvetica', 'Arial', 'sans-serif'],
-      }
+      },
     },
     colors: baseColorTheme,
     boxShadow: {
@@ -116,7 +117,9 @@ export default {
         primaryDarker: colors.accent.c100,
         primaryContrast: colors.neutralDark.c50,
         primaryBg: colors.accentDimmed.c400,
+        primaryBgSmallContrast: colors.accentDimmed.c100,
         primaryBgDarker: colors.accentDimmed.c500,
+        primaryBgLighter: colors.accentDimmed.c300,
       })
     ]
   })]
