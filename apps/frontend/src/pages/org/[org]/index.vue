@@ -1,38 +1,31 @@
 <template>
   <ThemeOverlap>
     <template #top>
-      <OrgTopNav />
+      <OrgTopNav v-if="req.data.value" :org="req.data.value" />
     </template>
 
     <Container class="mt-[5rem] grid grid-cols-3 gap-4">
-      <div class="col-span-2">
-        <Heading color="primary">Groups</Heading>
-        <div class="mt-4 grid gap-4 grid-cols-2">
-          <Card padding="sm">
-            test
-          </Card>
-          <Card padding="sm">
-            test
-          </Card>
-        </div>
-      </div>
-      <div>
-        <Card padding="none" type="primary" class="text-primaryBgSmallContrast">
-          <div class="p-6">
-            <Heading color="primary" size="sub" class="mb-2">About the project</Heading>
-            <p class="mb-4">All translations for the website.</p>
-            <Stat color="primary"><NuxtLink to="https://pretendo.network" target="_blank" class="text-primaryContrast underline hover:opacity-75">https://pretendo.network</NuxtLink></Stat>
-            <Stat color="primary"><span class="text-primaryContrast">24</span> contributors</Stat>
-            <Stat color="primary"><span class="text-primaryContrast">1254</span> strings</Stat>
-          </div>
-          <Divider type="primary" />
-          <div class="p-6">
-            <Heading color="primary" size="sub" class="mb-2">Let's get translating!</Heading>
-            <p class="mb-4">This project is open for translation.</p>
-            <Button type="primary" align="stretch">Start translating!</Button>
-          </div>
-        </Card>
+      <div v-if="projects.data.value" v-for="proj in projects.data.value.data" :key="proj.id" class="border p-3">
+        <p>{{ proj.name }} ({{ proj.id }})</p>
+        <NuxtLink :to="`/org/${route.params.org}/project/${proj.id}`">Show more</NuxtLink>
       </div>
     </Container>
   </ThemeOverlap>
 </template>
+
+<script setup lang="ts">
+import { getOrg } from '~/services/api/org';
+import { listProjects } from '~/services/api/project';
+
+const route = useRoute();
+const req = useImmediateAction({
+  async action() {
+    return getOrg(route.params.org.toString());
+  },
+})
+const projects = useImmediateAction({
+  async action() {
+    return listProjects(route.params.org.toString(), {});
+  },
+})
+</script>

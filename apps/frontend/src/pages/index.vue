@@ -10,11 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import { getOrgList } from '~/services/api/org';
+import { listOrgs } from '~/services/api/org';
 
 const org = useImmediateAction({
   async action() {
-    return getOrgList({});
+    return listOrgs({});
   },
 })
 </script>
