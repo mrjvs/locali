@@ -1,5 +1,17 @@
 import { useAuthStore } from "~/store/auth"
 
+export type PageControls = {
+  limit?: number,
+  offset?: number,
+}
+
+export type PageRes<T> = {
+  data: T[];
+  total: number;
+  offset: number;
+  count: number;
+}
+
 export const $api = {
   get fetch() {
     const config = useRuntimeConfig();
