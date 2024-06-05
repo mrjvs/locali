@@ -10,7 +10,8 @@ const c = tv({
   variants: {
     size: {
       large: 'text-2xl font-heading font-extrabold',
-      sub: 'text-lg font-sans font-bold',
+      sub: 'text-xl font-heading font-extrabold',
+      label: 'text-lg font-sans font-bold',
     },
     color: {
       normal: 'text-bold',

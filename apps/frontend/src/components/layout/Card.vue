@@ -12,6 +12,7 @@ const c = tv({
     padding: {
       sm: 'p-4',
       md: 'p-8',
+      none: '',
     },
     type: {
       normal: 'rounded-lg border border-cardStroke bg-card shadow-sm shadow-shadowColor/5',
@@ -20,11 +21,12 @@ const c = tv({
   },
   defaultVariants: {
     type: 'normal',
+    padding: "sm",
   }
 })
 
 const props = defineProps<{
-  padding: "sm" | "md",
+  padding?: "sm" | "md" | "none",
   type?: "normal" | "primary"
 }>();
 </script>
