@@ -1,7 +1,7 @@
 <template>
   <ThemeOverlap>
     <template #top>
-      <OrgTopNav v-if="req.data.value" :org="req.data.value.org" :project="req.data.value.project" />
+      <ProjectTopNav v-if="req.data.value" :org="req.data.value.org" :project="req.data.value.project" />
     </template>
 
     <Container class="mt-[5rem] grid grid-cols-3 gap-4">

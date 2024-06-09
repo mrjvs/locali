@@ -1,10 +1,15 @@
 <template>
   <TopNav>
     <template #left>
-      <TopNavOrg :org="props.org" :project="props.project" />
+      <TopNavOrg :org="props.org" />
     </template>
     <template #right>
       <TopNavPopulatedUser />
+    </template>
+    <template #default>
+      <TopNavItem :to="`/org/${props.org.id}`" exact>Projects</TopNavItem>
+      <TopNavItem :to="`/org/${props.org.id}/members`">Members</TopNavItem>
+      <TopNavItem :to="`/org/${props.org.id}/settings`">Settings</TopNavItem>
     </template>
   </TopNav>
 </template>
@@ -15,9 +20,5 @@ const props = defineProps<{
     name: string;
     id: string;
   },
-  project?: {
-    name: string;
-    id: string;
-  }
 }>();
 </script>

@@ -7,7 +7,7 @@
       <div class="flex items-center justify-end">
         <slot name="right" />
       </div>
-      <div class="flex absolute inset-0 items-center pointer-events-none [&>*]:pointer-events-auto">
+      <div class="flex absolute justify-center inset-0 items-center pointer-events-none [&>*]:pointer-events-auto">
         <slot />
       </div>
     </div>
