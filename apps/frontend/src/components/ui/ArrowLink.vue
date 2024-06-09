@@ -1,15 +1,15 @@
 <template>
   <NuxtLink v-if="props.to" :to="props.to" :class="[c, conditionalClasses]" @click="click">
-    <IconArrowRight v-if="props.flip && props.arrow" :class="arrowClass" />
+    <Icon name="mingcute:arrow-right-line" v-if="props.flip && props.arrow" :class="arrowClass" />
     <slot />
-    <IconArrowRight v-if="!props.flip && props.arrow" :class="arrowClass" />
+    <Icon name="mingcute:arrow-right-line" v-if="!props.flip && props.arrow" :class="arrowClass" />
   </NuxtLink>
   <button v-else :class="[c, conditionalClasses]"
     @click="click"
     >
-    <IconArrowRight v-if="props.flip && props.arrow" :class="arrowClass" />
+    <Icon name="mingcute:arrow-right-line" v-if="props.flip && props.arrow" :class="arrowClass" />
     <slot />
-    <IconArrowRight v-if="!props.flip && props.arrow" :class="arrowClass" />
+    <Icon name="mingcute:arrow-right-line" v-if="!props.flip && props.arrow" :class="arrowClass" />
   </button>
 </template>
 

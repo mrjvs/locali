@@ -2,7 +2,7 @@
   <div class="min-h-7 flex">
     <LclTransition :show="showing" animation="slide-from-top">
       <p class="text-error flex text-sm items-center font-bold mt-1.5">
-        <IconAlert class="mr-2 ml-1" />
+        <Icon name="mingcute:alert-fill" class="mr-2 text-lg ml-1" />
         <FormErrorBase :error="lastSeenError" />
       </p>
     </LclTransition>

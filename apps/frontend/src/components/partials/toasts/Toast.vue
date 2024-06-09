@@ -1,7 +1,7 @@
 <template>
   <div class="bg-error text-errorContrast min-w-[300px] max-w-full rounded-lg flex overflow-hidden">
     <div class="px-4 flex-1 py-2 flex items-center">
-      <IconAlert class="mr-3" />
+      <Icon name="mingcute:alert-fill" class="mr-3 text-lg" />
       <p class="flex-1">
         <b class="font-bold">{{ props.toast.title }}</b>
         <span v-if="props.toast.description" class="ml-2 opacity-75">{{ props.toast.description }}</span>

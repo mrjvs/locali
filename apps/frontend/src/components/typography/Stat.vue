@@ -5,7 +5,7 @@
   }">
     <div class="mr-3">
       <slot name="icon">
-        <IconAlert />
+        <Icon name="mingcute:alert-fill" class="text-lg" />
       </slot>
     </div>
     <div>

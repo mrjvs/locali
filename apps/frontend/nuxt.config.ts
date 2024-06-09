@@ -6,7 +6,8 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
-    "nuxt-svgo"
+    "nuxt-svgo",
+    "nuxt-icon"
   ],
   runtimeConfig: {
     public: {

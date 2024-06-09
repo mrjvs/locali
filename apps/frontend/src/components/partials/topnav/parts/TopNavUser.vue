@@ -7,7 +7,7 @@
       }">
         <div class="bg-primary rounded-full h-7 w-7 mr-2" />
         <p>{{ props.user.name }}</p>
-        <IconChevronDown class="text-[0.5em] ml-2" />
+        <Icon name="mingcute:down-small-fill" class="ml-1" />
       </MenuButton>
 
       <div class="absolute bottom-0 right-0">

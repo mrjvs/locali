@@ -5,7 +5,7 @@
       @error="(val: unknown) => (error = val)"
     />
     <div v-if="error" class="flex h-screen flex-col items-center justify-center text-error">
-      <IconAlert class="!mb-2 block" />
+      <Icon name="mingcute:alert-fill" class="!mb-2 block text-lg" />
       <p class="font-bold">Couldn't load account data</p>
     </div>
     <div v-else-if="pending" class="flex h-screen text-2xl text-primary items-center justify-center">
