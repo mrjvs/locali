@@ -11,21 +11,24 @@
       </MenuButton>
 
       <div class="absolute bottom-0 right-0">
-        <div class="absolute top-2 right-0 w-56 z-50">
+        <div class="absolute top-2 right-0 w-[280px] z-50">
           <LclTransition animation="slide-from-top" :show="open">
             <MenuItems static>
-              <Card padding="none" class="flex flex-col">
-                <MenuItem v-slot="{ active }">
-                  <button
-                    :class="[
-                      active ? 'text-primary' : 'text-text hover:text-primary',
-                      'group flex items-center rounded-md m-1 px-2 py-1',
-                    ]"
-                    @click="logout"
-                  >
-                    Logout
-                  </button>
-                </MenuItem>
+              <Card padding="none">
+                <div class="p-2 space-y-1.5 flex flex-col">
+                  <MenuItem v-slot="{ active }">
+                    <TopNavDropdownItem :active="active" icon="mingcute:settings-3-fill" to="/settings">Account settings</TopNavDropdownItem>
+                  </MenuItem>
+                  <MenuItem v-slot="{ active }">
+                    <TopNavDropdownItem :active="active" icon="mingcute:exit-door-fill" @click="logout">Logout</TopNavDropdownItem>
+                  </MenuItem>
+                </div>
+                <TopNavDropdownDivider />
+                <div class="p-5 flex flex-col text-text">
+                  <Heading size="text" class="mb-2">New organisation</Heading>
+                  <p class="mb-4">Want to translate your projects? Create a new organisation.</p>
+                  <Button type="primary">Create organisation</Button>
+                </div>
               </Card>
             </MenuItems>
           </LclTransition>

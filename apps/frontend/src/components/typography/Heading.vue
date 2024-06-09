@@ -12,6 +12,7 @@ const c = tv({
       large: 'text-2xl font-heading font-extrabold',
       sub: 'text-xl font-heading font-extrabold',
       label: 'text-lg font-sans font-bold',
+      text: 'text-base font-sans font-bold',
     },
     color: {
       normal: 'text-bold',
@@ -25,7 +26,7 @@ const c = tv({
 })
 
 const props = defineProps<{
-  size?: "large" | "sub",
+  size?: "large" | "sub" | "label" | "text",
   color?: "primary" | "normal",
 }>();
 </script>
