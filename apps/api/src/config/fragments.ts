@@ -15,5 +15,11 @@ export const fragments: Record<string, Fragment> = {
     crypto: {
       secret: '12345678901234567890123456789012',
     },
+    mailer: {
+      enabled: 'true',
+      smtpHost: 'localhost',
+      smtpPort: 1025,
+      secure: false,
+    },
   },
 };

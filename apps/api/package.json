@@ -19,6 +19,7 @@
     "start": "node dist/main.js",
     "build": "tsup",
     "dev": "tsup --watch --onSuccess 'node dist/main.js'",
+    "dev:email": "email dev --dir ./src/modules/emails/templates",
     "seed": "tsup --config tsup.seed.config.ts --onSuccess 'node dist/modules/prisma/seed.js'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
@@ -29,6 +30,8 @@
     "@repo/typescript-config": "workspace:*",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.7",
+    "@types/nodemailer": "^6.4.15",
+    "@types/react": "^18.3.3",
     "prisma": "^5.12.1",
     "tsup": "7.2.0",
     "type-fest": "^4.15.0"
@@ -38,14 +41,19 @@
     "@fastify/swagger": "^8.14.0",
     "@neato/config": "^3.0.0",
     "@prisma/client": "^5.12.1",
+    "@react-email/components": "0.0.19",
+    "@react-email/render": "^0.0.15",
     "@repo/perms": "workspace:*",
     "argon2": "^0.40.1",
     "cross-env": "^7.0.3",
     "fastify": "^4.26.2",
     "fastify-type-provider-zod": "^1.1.9",
     "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.13",
     "pino": "^8.20.0",
     "pino-pretty": "^11.0.0",
+    "react": "^18.3.1",
+    "react-email": "2.1.4",
     "typeid-js": "^0.6.0",
     "zod": "^3.22.4"
   }
