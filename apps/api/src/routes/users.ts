@@ -9,6 +9,7 @@ import { handler } from '@/utils/handle';
 import { mapPage, pagerSchema } from '@/utils/pages';
 import { makeRouter } from '@/utils/routes';
 import { getId } from '@/utils/get-id';
+import { passwordSchema } from '@/utils/zod';
 
 function getAtMe(auth: AuthContext, id: string) {
   if (id === '@me') return auth.data.getUserIdOrDefault() ?? id;
@@ -23,7 +24,7 @@ export const usersRouter = makeRouter((app) => {
         description: 'Create user',
         body: z.object({
           email: z.string().min(1),
-          password: z.string().min(1),
+          password: passwordSchema(),
         }),
       },
     },

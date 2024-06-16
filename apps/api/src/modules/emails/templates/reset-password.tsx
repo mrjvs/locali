@@ -1,9 +1,12 @@
+import { makeEmailRenderer } from '../builder';
 import { EmailContainer } from '../components/container';
 import { Txt } from '../components/text';
 
 interface ResetPasswordEmailProps {
   resetLink: string;
 }
+
+// TODO better email template
 
 export default function ResetPasswordEmail(props: ResetPasswordEmailProps) {
   return (
@@ -21,3 +24,10 @@ export default function ResetPasswordEmail(props: ResetPasswordEmailProps) {
 ResetPasswordEmail.PreviewProps = {
   resetLink: 'https://example.com',
 } satisfies ResetPasswordEmailProps;
+
+export const resetPasswordEmail = makeEmailRenderer({
+  template: ResetPasswordEmail,
+  subject() {
+    return 'Password reset requested for Locali';
+  },
+});

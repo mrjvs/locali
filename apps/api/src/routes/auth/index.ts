@@ -6,6 +6,7 @@ import { verifyPassword } from '@/utils/auth/pass';
 import { ApiError, NotFoundError } from '@/utils/error';
 import { createSession, makeSessionToken } from '@/utils/auth/session';
 import { mapExpandedUser } from '@/mappings/user';
+import { timeout } from '@/utils/timeout';
 
 export const authRouter = makeRouter((app) => {
   app.post(
@@ -20,6 +21,9 @@ export const authRouter = makeRouter((app) => {
       },
     },
     handler(async ({ body }) => {
+      // wait a few seconds on error, to prevent timing attacks
+      const timeoutPromise = timeout(2000);
+
       const user = await prisma.user.findUnique({
         where: {
           email: body.email,
@@ -33,9 +37,14 @@ export const authRouter = makeRouter((app) => {
           },
         },
       });
-      if (!user) throw ApiError.forCode('authInvalidInput', 400);
-      if (!(await verifyPassword(user.passwordHash, body.password)))
+      if (!user) {
+        await timeoutPromise;
         throw ApiError.forCode('authInvalidInput', 400);
+      }
+      if (!(await verifyPassword(user.passwordHash, body.password))) {
+        await timeoutPromise;
+        throw ApiError.forCode('authInvalidInput', 400);
+      }
 
       const session = await createSession(user);
       return {
