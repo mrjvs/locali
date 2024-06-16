@@ -24,8 +24,20 @@ export type LogoutRes = {
   id: string;
 }
 
+export type RegisterInput = {
+  email: string;
+  password: string;
+}
+
 export async function login(input: LoginInput) {
   return $api.fetch<LoginRes>('/api/v1/auth/login', {
+    method: 'POST',
+    body: input,
+  })
+}
+
+export async function createAccount(input: RegisterInput) {
+  return $api.fetch<LoginRes>('/api/v1/users', {
     method: 'POST',
     body: input,
   })

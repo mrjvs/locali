@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
 import { z } from "zod";
-import { login } from "~/services/api/auth";
+import { createAccount } from "~/services/api/auth";
 import { api } from "~/services/unwrap";
 import { useAuthStore } from "~/store/auth";
 
@@ -54,6 +54,7 @@ definePageMeta({
 });
 
 const auth = useAuthStore();
+const router = useRouter();
 
 const form = useForm({
   id: "signup",
@@ -87,7 +88,7 @@ const createAction = useAction({
       return;
     }
 
-    const res = await api(login(data.data));
+    const res = await api(createAccount(data.data));
     if (res.error) {
       form.errors.insert(res.error.toFormError());
       return;
@@ -95,6 +96,7 @@ const createAction = useAction({
 
     auth.setToken(res.data.token);
     await auth.retrieve();
+    router.push("/");
   },
 });
 </script>
