@@ -6,6 +6,7 @@ import { organisationRouter } from '@/routes/organisations';
 import { projectRouter } from '@/routes/projects';
 import { organisationMemberRouter } from '@/routes/organisations/member';
 import { projectMemberRouter } from '@/routes/projects/member';
+import { passwordAuthrouter } from '@/routes/auth/password';
 
 export async function setupRoutes(app: FastifyInstance) {
   await app.register(indexRouter.register);
@@ -15,4 +16,5 @@ export async function setupRoutes(app: FastifyInstance) {
   await app.register(projectRouter.register);
   await app.register(organisationMemberRouter.register);
   await app.register(projectMemberRouter.register);
+  await app.register(passwordAuthrouter.register);
 }
