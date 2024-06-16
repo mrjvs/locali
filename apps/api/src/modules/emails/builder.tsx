@@ -1,6 +1,6 @@
-import { renderAsync } from '@react-email/components';
+import { render } from '@react-email/render';
 import type { ReactNode } from 'react';
-import { getMailer } from '.';
+import { getMailer } from './index';
 
 export type EmailSenderOptions = {
   to: string;
@@ -24,8 +24,8 @@ export function makeEmailRenderer<T extends Record<any, any>>(ops: {
   async function renderEmail(options: { props: T }) {
     const Template = ops.template;
     const emailJsx = <Template {...options.props} />;
-    const html = await renderAsync(emailJsx);
-    const text = await renderAsync(emailJsx, { plainText: true });
+    const html = render(emailJsx);
+    const text = render(emailJsx, { plainText: true });
     const subject = ops.subject(options.props);
     return {
       html,

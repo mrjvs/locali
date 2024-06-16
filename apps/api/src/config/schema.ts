@@ -34,6 +34,7 @@ export const configSchema = z.object({
         secure: zodCoercedBoolean().default(false),
         smtpUser: z.string().min(1).optional(),
         smtpPassword: z.string().min(1).optional(),
+        from: z.string().min(1).optional(),
       }),
     ])
     .default({ enabled: 'false' }),
