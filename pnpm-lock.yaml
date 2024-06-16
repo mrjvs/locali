@@ -171,6 +171,37 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(tailwindcss@3.4.3)
 
+  apps/website:
+    dependencies:
+      '@nuxtjs/google-fonts':
+        specifier: ^3.2.0
+        version: 3.2.0
+      '@nuxtjs/tailwindcss':
+        specifier: ^6.12.0
+        version: 6.12.0
+      nuxt:
+        specifier: ^3.11.2
+        version: 3.11.2(@unocss/reset@0.59.4)(floating-vue@5.2.2)(unocss@0.59.4)(vite@5.2.9)
+      nuxt-icon:
+        specifier: ^0.6.10
+        version: 0.6.10(nuxt@3.11.2)(vite@5.2.9)(vue@3.4.23)
+      nuxt-svgo:
+        specifier: ^4.0.1
+        version: 4.0.1(vue@3.4.23)
+      vue:
+        specifier: ^3.4.21
+        version: 3.4.23
+      vue-router:
+        specifier: ^4.3.0
+        version: 4.3.2(vue@3.4.23)
+    devDependencies:
+      '@iconify-json/mingcute':
+        specifier: ^1.1.17
+        version: 1.1.17
+      tailwindcss:
+        specifier: ^3.4.3
+        version: 3.4.3
+
   packages/eslint-config:
     devDependencies:
       '@repo/prettier-config':
@@ -10339,7 +10370,7 @@ packages:
       postcss: ^8.2.2
     dependencies:
       postcss: 8.4.38
-      postcss-selector-parser: 6.0.16
+      postcss-selector-parser: 6.1.0
       postcss-value-parser: 4.2.0
     dev: false
 
@@ -10460,7 +10491,7 @@ packages:
       caniuse-api: 3.0.0
       cssnano-utils: 4.0.2(postcss@8.4.38)
       postcss: 8.4.38
-      postcss-selector-parser: 6.0.16
+      postcss-selector-parser: 6.1.0
     dev: false
 
   /postcss-minify-font-values@6.1.0(postcss@8.4.38):
@@ -10504,7 +10535,7 @@ packages:
       postcss: ^8.4.31
     dependencies:
       postcss: 8.4.38
-      postcss-selector-parser: 6.0.16
+      postcss-selector-parser: 6.1.0
     dev: false
 
   /postcss-nested@6.0.1(postcss@8.4.38):
@@ -10650,14 +10681,6 @@ packages:
       postcss-value-parser: 4.2.0
     dev: false
 
-  /postcss-selector-parser@6.0.16:
-    resolution: {integrity: sha512-A0RVJrX+IUkVZbW3ClroRWurercFhieevHB38sr2+l9eUClMqome3LmEmnhlNy+5Mr2EYN6B2Kaw9wYdd+VHiw==}
-    engines: {node: '>=4'}
-    dependencies:
-      cssesc: 3.0.0
-      util-deprecate: 1.0.2
-    dev: false
-
   /postcss-selector-parser@6.1.0:
     resolution: {integrity: sha512-UMz42UD0UY0EApS0ZL9o1XnLhSTtvvvLe5Dc2H2O56fvRZi+KulDyf5ctDhhtYJBGKStV2FL1fy6253cmLgqVQ==}
     engines: {node: '>=4'}
@@ -10683,7 +10706,7 @@ packages:
       postcss: ^8.4.31
     dependencies:
       postcss: 8.4.38
-      postcss-selector-parser: 6.0.16
+      postcss-selector-parser: 6.1.0
     dev: false
 
   /postcss-value-parser@4.2.0:
@@ -11992,7 +12015,7 @@ packages:
     dependencies:
       browserslist: 4.23.0
       postcss: 8.4.38
-      postcss-selector-parser: 6.0.16
+      postcss-selector-parser: 6.1.0
     dev: false
 
   /sucrase@3.35.0:
@@ -12678,7 +12701,7 @@ packages:
       estree-walker: 3.0.3
       fast-glob: 3.3.2
       local-pkg: 0.5.0
-      magic-string: 0.30.9
+      magic-string: 0.30.10
       mlly: 1.6.1
       pathe: 1.1.2
       pkg-types: 1.0.3
@@ -12856,9 +12879,9 @@ packages:
     resolution: {integrity: sha512-nC5q0DnPEPVURPhfPQLahhSTnemVtPzdx7ofiRxXpOB2SYnb3MfdU3DVGyJdS8Lx+tBWeAePO8BfU/3EgksM7Q==}
     hasBin: true
     dependencies:
-      '@babel/core': 7.24.4
+      '@babel/core': 7.24.5
       '@babel/standalone': 7.24.4
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.7
       defu: 6.1.4
       jiti: 1.21.0
       mri: 1.2.0
