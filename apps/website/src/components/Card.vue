@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow-sm p-7 rounded-2xl bg-neutral-c50 border border-neutral-c300">
+  <div class="shadow-sm p-7 rounded-2xl bg-neutral-c50 hover:border-accent-c200 hover:scale-105 transition border border-neutral-c300">
     <div class="h-9 w-9 bg-opacity-15 rounded-full flex items-center justify-center" :class="props.bgColorClass">
       <Icon :name="props.icon" :class="props.iconColorClass" class="text-xl" />
     </div>
