@@ -3,7 +3,7 @@
     <div class="h-9 w-9 bg-opacity-15 rounded-full flex items-center justify-center" :class="props.bgColorClass">
       <Icon :name="props.icon" :class="props.iconColorClass" class="text-xl" />
     </div>
-    <h1 class="font-heading mb-3 mt-4 text-neutral-c800">
+    <h1 class="font-heading text-xl font-extrabold mb-3 mt-4 text-neutral-c800">
       {{ props.title }}
     </h1>
     <p>

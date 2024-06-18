@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 html, body {
-  @apply relative font-sans bg-neutral-c100 text-neutral-c600;
+  @apply relative font-sans bg-neutral-c100 text-neutral-c600 overflow-x-hidden;
 }
