@@ -1,10 +1,11 @@
 <template>
   <div>
+    <Colors />
     <div class="h-1.5 bg-accent-c300" />
     <Nav />
     <Hero />
-    <div class="flex">
-      <div class="flex-1">
+    <Container class="flex gap-4">
+      <div class="flex-1 gap-4">
         <Card
           icon="mingcute:list-check-2-line"
           title="Validate translations with Locali Checks"
@@ -31,7 +32,7 @@
           Whether you are translating yourself, using a translation service or depending on crowd sourcing. Locali fits any size or workflow.
         </Card>
       </div>
-      <div class="flex-1">
+      <div class="flex-1 gap-4">
         <Card
           class="mt-20"
           icon="mingcute:git-branch-fill"
@@ -55,8 +56,8 @@
         Join the waitlist and get updates on progress on Locali while it’s being built. You may even get early access to the platform.
         </DarkCard>
       </div>
-    </div>
-    <p class="mt-40 text-center">
+    </Container>
+    <p class="mt-40 mb-6 text-center">
       <span>Copyright Locali 2024</span>
       <span class="h-1 w-1 mx-2 bg-neutral-c200 rounded-full" />
       <span>Made with passion</span>

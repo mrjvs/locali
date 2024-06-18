@@ -6,7 +6,7 @@
     <p class="text-accentDimmed-c200">
       <slot />
     </p>
-    <button class="w-full m-1.5 text-center text-neutral-c50 py-2 px-4 border border-accent-c200 from-accent-c200 to-accent-c300 bg-gradient-to-b">
+    <button class="w-full mt-6 rounded-lg text-center text-neutral-c50 py-2 px-4 border border-accent-c200 from-accent-c200 to-accent-c300 bg-gradient-to-b">
       Join the waitlist!
     </button>
   </div>
