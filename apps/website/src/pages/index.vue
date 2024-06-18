@@ -26,7 +26,7 @@
               Keep your translations synced with any git repository. Either push directly to the main branch or have automatic pull requests.
             </Card>
             <Card
-              icon="mingcute:github-fill"
+              icon="mingcute:git-branch-fill"
               title="Fit any team size"
               bg-color-class="bg-[#E13065]"
               icon-color-class="text-[#E13065]"

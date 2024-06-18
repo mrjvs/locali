@@ -6,7 +6,7 @@
     <p class="text-accentDimmed-c100">
       <slot />
     </p>
-    <button class="w-full mt-6 rounded-lg text-center text-neutral-c50 py-2 px-4 border border-accent-c200 from-accent-c200 to-accent-c300 bg-gradient-to-b">
+    <button @click="scroll" class="w-full hover:to-accent-c400 active:scale-105 transition mt-6 rounded-lg text-center text-neutral-c50 py-2 px-4 border border-accent-c200 from-accent-c200 to-accent-c300 bg-gradient-to-b">
       Join the waitlist!
     </button>
   </div>
@@ -16,4 +16,8 @@
 const props = defineProps<{
   title: string;
 }>();
+
+function scroll() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 </script>
