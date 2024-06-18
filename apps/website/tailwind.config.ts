@@ -52,7 +52,7 @@ export default {
         sans: ['"Source Sans 3"', 'Helvetica', 'Arial', 'sans-serif'],
         heading: ['"Manrope"', '"Source Sans 3"', 'Helvetica', 'Arial', 'sans-serif'],
       },
+      colors: colors,
     },
-    colors: colors,
   },
 } satisfies Config;
