@@ -1,4 +1,10 @@
-import type { OrgMember, Project, ProjectMember, User } from '@prisma/client';
+import type {
+  OrgMember,
+  Organisation,
+  Project,
+  ProjectMember,
+  User,
+} from '@prisma/client';
 import type { PermissionContext } from '@repo/perms';
 import { resolvePermissionWithContext } from '@repo/perms';
 import { basePerms, baseUserPerms, rolePerms } from './role-perms';
@@ -46,7 +52,7 @@ export function resolveProjectRoles(
   );
 }
 
-type PopulatedOrgMember = OrgMember;
+type PopulatedOrgMember = OrgMember & { org: Organisation };
 type PopulatedProjectMember = ProjectMember & { project: Project };
 export type PopulatedUser = User & {
   orgMembers: PopulatedOrgMember[];

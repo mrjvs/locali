@@ -29,7 +29,11 @@ export const authRouter = makeRouter((app) => {
           email: body.email,
         },
         include: {
-          orgMembers: true,
+          orgMembers: {
+            include: {
+              org: true,
+            },
+          },
           projectMembers: {
             include: {
               project: true,

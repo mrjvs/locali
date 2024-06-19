@@ -1,4 +1,6 @@
 import { $api } from "./fetch";
+import type { UserSideOrgMemberRes } from "./org";
+import type { UserSideProjectMemberRes } from "./project";
 
 export type UserRes = {
   id: string;
@@ -8,6 +10,8 @@ export type UserRes = {
 
 export type ExpandedUserRes = UserRes & {
   permissions: string[];
+  projectMembers: UserSideProjectMemberRes[];
+  orgMembers: UserSideOrgMemberRes[];
 }
 
 export type LoginRes = {

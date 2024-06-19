@@ -66,6 +66,9 @@ const baseColorTheme = {
   inputBorder: colors.neutral.c300,
   error: colors.semantic.error,
   errorContrast: 'white',
+  tableBorder: colors.neutral.c200,
+  tableHeaderBg: colors.neutral.c100,
+  tableBg: colors.neutral.c50,
 
   // these colors are for dynamic themed elements
   primaryLighter: colors.accent.c200,
@@ -113,6 +116,9 @@ export default {
         error: colors.semantic.error,
         errorContrast: 'white',
         black: 'black',
+        tableBorder: colors.neutralDark.c200,
+        tableHeaderBg: colors.neutralDark.c100,
+        tableBg: colors.neutralDark.c50,
 
         primaryLighter: colors.accent.c300,
         primary: colors.accent.c200,

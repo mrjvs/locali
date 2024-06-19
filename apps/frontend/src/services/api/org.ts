@@ -1,9 +1,24 @@
+import type { UserRes } from "./auth";
 import { $api, type PageControls, type PageRes } from "./fetch";
 
 export type OrgRes = {
   id: string;
   name: string;
   createdAt: string;
+}
+
+export type UserSideOrgMemberRes = {
+  id: string;
+  createdAt: string;
+  userId: string;
+  org: OrgRes;
+}
+
+export type OrgMemberRes = {
+  id: string;
+  createdAt: string;
+  orgId: string;
+  user: UserRes,
 }
 
 export async function listOrgs(page: PageControls) {
@@ -14,4 +29,10 @@ export async function listOrgs(page: PageControls) {
 
 export async function getOrg(id: string) {
   return $api.fetch<OrgRes>(`/api/v1/organisations/${id}`);
+}
+
+export async function listOrgMembers(id: string, page: PageControls) {
+  return $api.fetch<PageRes<OrgMemberRes>>(`/api/v1/organisations/${id}/members`, {
+    query: page,
+  });
 }

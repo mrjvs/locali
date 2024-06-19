@@ -37,7 +37,11 @@ export const usersRouter = makeRouter((app) => {
           passwordHash: await hashPassword(body.password),
         },
         include: {
-          orgMembers: true,
+          orgMembers: {
+            include: {
+              org: true,
+            },
+          },
           projectMembers: {
             include: {
               project: true,
@@ -101,7 +105,11 @@ export const usersRouter = makeRouter((app) => {
           id,
         },
         include: {
-          orgMembers: true,
+          orgMembers: {
+            include: {
+              org: true,
+            },
+          },
           projectMembers: {
             include: {
               project: true,
