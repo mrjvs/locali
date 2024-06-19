@@ -68,3 +68,13 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+useSeoMeta({
+  title: 'Locali - Localisation without all of the hassle',
+  description: 'Making large scale localization fun for both Developers and Translators',
+  ogDescription: 'Making large scale localization fun for both Developers and Translators',
+  twitterCard: 'summary_large_image',
+  ogImage: 'https://locali.dev/cover.png',
+});
+</script>
