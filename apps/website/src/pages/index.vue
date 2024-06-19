@@ -71,12 +71,16 @@
 
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Locali - Localisation without all of the hassle',
+  title: 'Locali — Localisation without all of the hassle',
+  ogTitle: 'Locali — Localisation without all of the hassle',
+  twitterTitle: 'Locali — Localisation without all of the hassle',
   description: 'Making large scale localization fun for both Developers and Translators',
   ogDescription: 'Making large scale localization fun for both Developers and Translators',
+  twitterDescription: 'Making large scale localization fun for both Developers and Translators',
   ogType: 'website',
   ogUrl: 'https://locali.dev/',
   twitterCard: 'summary_large_image',
   ogImage: 'https://locali.dev/cover.png',
+  twitterImage: 'https://locali.dev/cover.png'
 });
 </script>
