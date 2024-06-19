@@ -19,8 +19,7 @@
           </Sidebar>
         </template>
 
-        <Heading>General settings</Heading>
-        <p>Change the most common settings of an organisation</p>
+        <SectionHeading title="General settings" description="Change the most common settings of an organisation" />
       </AsideLayout>
     </Container>
   </ThemeOverlap>

@@ -12,6 +12,7 @@ const c = tv({
   variants: {
     size: {
       normal: 'max-w-[1200px] w-full',
+      medium: 'max-w-[1000px] w-full',
       small: 'max-w-[750px] w-full',
     },
   },
@@ -21,6 +22,6 @@ const c = tv({
 })
 
 const props = defineProps<{
-  size?: "normal" | "small";
+  size?: "normal" | "small" | "medium";
 }>();
 </script>
