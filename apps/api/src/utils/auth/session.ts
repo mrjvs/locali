@@ -1,5 +1,6 @@
 import type {
   OrgMember,
+  Organisation,
   Project,
   ProjectMember,
   User,
@@ -13,7 +14,7 @@ const expiryInMs = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 export type PopulatedSession = UserSession & {
   user: User & {
-    orgMembers: OrgMember[];
+    orgMembers: (OrgMember & { org: Organisation })[];
     projectMembers: (ProjectMember & { project: Project })[];
   };
 };
@@ -35,7 +36,11 @@ export async function fetchSessionAndUpdateExpiry(
       include: {
         user: {
           include: {
-            orgMembers: true,
+            orgMembers: {
+              include: {
+                org: true,
+              },
+            },
             projectMembers: {
               include: {
                 project: true,

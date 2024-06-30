@@ -82,7 +82,11 @@ export const passwordAuthrouter = makeRouter((app) => {
           // TODO generate new security stamp
         },
         include: {
-          orgMembers: true,
+          orgMembers: {
+            include: {
+              org: true,
+            },
+          },
           projectMembers: {
             include: {
               project: true,
