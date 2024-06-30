@@ -16,6 +16,7 @@ export const organisationRouter = makeRouter((app) => {
         description: 'Create organisation',
         body: z.object({
           name: z.string().min(1),
+          description: z.string().min(1).nullable(),
         }),
       },
     },
@@ -25,6 +26,7 @@ export const organisationRouter = makeRouter((app) => {
         data: {
           id: getId('org'),
           name: body.name,
+          description: body.description,
           members: {
             create: {
               id: getId('orgmbr'),

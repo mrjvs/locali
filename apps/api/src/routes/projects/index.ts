@@ -18,6 +18,7 @@ export const projectRouter = makeRouter((app) => {
         }),
         body: z.object({
           name: z.string().min(1),
+          description: z.string().min(1).nullable(),
         }),
       },
     },
@@ -30,6 +31,7 @@ export const projectRouter = makeRouter((app) => {
           id: getId('prj'),
           orgId: params.id,
           name: body.name,
+          description: body.description,
         },
       });
       return mapProject(newProject);
@@ -124,6 +126,9 @@ export const projectRouter = makeRouter((app) => {
         skip: query.offset,
         orderBy: {
           createdAt: 'desc',
+        },
+        where: {
+          orgId: params.id,
         },
       });
       return mapPage(query, projects.map(mapProject), total);

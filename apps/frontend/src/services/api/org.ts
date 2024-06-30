@@ -4,7 +4,13 @@ import { $api, type PageControls, type PageRes } from "./fetch";
 export type OrgRes = {
   id: string;
   name: string;
+  description: string | null;
   createdAt: string;
+}
+
+export type OrgCreatePayload = {
+  name: string;
+  description: string | null;
 }
 
 export type UserSideOrgMemberRes = {
@@ -29,6 +35,13 @@ export async function listOrgs(page: PageControls) {
 
 export async function getOrg(id: string) {
   return $api.fetch<OrgRes>(`/api/v1/organisations/${id}`);
+}1
+
+export async function createOrg(payload: OrgCreatePayload) {
+  return $api.fetch<OrgRes>(`/api/v1/organisations`, {
+    method: "POST",
+    body: payload
+  });
 }
 
 export async function listOrgMembers(id: string, page: PageControls) {

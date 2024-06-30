@@ -153,6 +153,9 @@ export const projectMemberRouter = makeRouter((app) => {
         orderBy: {
           createdAt: 'desc',
         },
+        where: {
+          projectId: project.id,
+        },
         include: {
           user: true,
         },

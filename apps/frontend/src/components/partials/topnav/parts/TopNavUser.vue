@@ -27,7 +27,7 @@
                 <div class="p-5 flex flex-col text-text">
                   <Heading size="text" class="mb-2">New organisation</Heading>
                   <p class="mb-4">Want to translate your projects? Create a new organisation.</p>
-                  <Button type="primary">Create organisation</Button>
+                  <Button to="/org/create" type="primary">Create organisation</Button>
                 </div>
               </Card>
             </MenuItems>

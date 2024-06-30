@@ -123,6 +123,9 @@ export const organisationMemberRouter = makeRouter((app) => {
       const members = await prisma.orgMember.findMany({
         take: query.limit,
         skip: query.offset,
+        where: {
+          orgId: params.org,
+        },
         orderBy: {
           createdAt: 'desc',
         },

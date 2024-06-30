@@ -37,6 +37,7 @@ model Organisation {
   createdAt DateTime @default(now()) @map("created_at")
 
   name String
+  description String?
 
   projects Project[]
   members  OrgMember[]
@@ -65,6 +66,7 @@ model Project {
   orgId     String       @map("org_id")
 
   name    String
+  description String?
   members ProjectMember[]
 
   @@map("project")
