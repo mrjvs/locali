@@ -3,15 +3,21 @@
   "version": "0.0.0",
   "packageManager": "pnpm@8.14.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel --concurrency 25",
     "lint": "turbo run lint",
-    "lint:fix": "turbo run lint:fix"
+    "lint:fix": "turbo run lint:fix",
+    "test": "turbo run test"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "turbo": "1.11.3",
-    "tsup": "7.2.0"
+    "tsup": "7.2.0",
+    "turbo": "1.11.3"
+  },
+  "dependencies": {
+    "vite": "^5.2.9",
+    "vitest": "^1.5.0"
   }
 }

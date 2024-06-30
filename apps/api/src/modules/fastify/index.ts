@@ -1,12 +1,14 @@
 import Fastify, { type FastifyInstance } from 'fastify';
 import cors from '@fastify/cors';
 import {
+  jsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod';
 import { ZodError } from 'zod';
-import { conf } from '@/config';
-import { isStatusError } from '@/utils/error';
+import { fastifySwagger } from '@fastify/swagger';
+import { conf, version } from '@/config';
+import { isApiError } from '@/utils/error';
 import { logger } from '../log';
 import { setupRoutes } from './routes';
 
@@ -22,6 +24,23 @@ export async function setupFastify(): Promise<FastifyInstance> {
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);
 
+  await app.register(fastifySwagger, {
+    openapi: {
+      info: {
+        title: 'Locali',
+        description: 'API server of locali',
+        version,
+      },
+      servers: [
+        {
+          url: 'http://localhost:8080',
+          description: 'Development server',
+        },
+      ],
+    },
+    transform: jsonSchemaTransform,
+  });
+
   app.setErrorHandler((err, req, reply) => {
     if (err instanceof ZodError) {
       void reply.status(400).send({
@@ -31,11 +50,18 @@ export async function setupFastify(): Promise<FastifyInstance> {
       return;
     }
 
-    if (isStatusError(err)) {
-      void reply.status(err.errorStatusCode).send({
-        errorType: 'message',
-        message: err.message,
-      });
+    if (isApiError(err)) {
+      if (err.errorCode) {
+        void reply.status(err.errorStatusCode).send({
+          errorType: 'code',
+          code: err.errorCode,
+        });
+      } else {
+        void reply.status(err.errorStatusCode).send({
+          errorType: 'message',
+          message: err.message,
+        });
+      }
       return;
     }
 
@@ -92,6 +118,13 @@ export async function setupFastifyRoutes(app: FastifyInstance) {
   await app.register(
     async (api) => {
       await setupRoutes(api);
+      app.route({
+        url: '/swagger',
+        method: 'GET',
+        handler: (req, res) => {
+          return res.send(app.swagger());
+        },
+      });
     },
     {
       prefix: conf.server.basePath,
