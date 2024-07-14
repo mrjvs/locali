@@ -41,7 +41,7 @@
 import { tv } from 'tailwind-variants';
 
 const c = tv({
-  base: 'rounded-xl border-2 text-center cursor-pointer relative',
+  base: 'rounded-xl border-2 text-center inline-block cursor-pointer relative',
   variants: {
     align: {
       stretch: 'w-full',

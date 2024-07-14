@@ -8,7 +8,12 @@
     </template>
 
     <Container size="small">
-      <Heading class="mb-4 mt-12">Project</Heading>
+      <Heading class="mb-4 mt-12">
+        Project
+        <template #right>
+          <Button :to="`/org/${route.params.org}/project/create`">Create project</Button>
+        </template>
+      </Heading>
       <div class="grid gap-4">
         <NuxtLink :to="`/org/${route.params.org}/project/${proj.id}`" v-if="projects.data.value" v-for="proj in projects.data.value.data" :key="proj.id">
           <Card class="flex items-center">
@@ -21,7 +26,6 @@
           </Card>
         </NuxtLink>
       </div>
-      <Button :to="`/org/${route.params.org}/project/create`">Create project</Button>
     </Container>
 
   </ThemeOverlap>
