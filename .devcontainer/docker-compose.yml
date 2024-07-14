@@ -1,0 +1,36 @@
+version: '3.8'
+
+name: "lcl_dev"
+
+services:
+  devcontainer:
+    build: .
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    environment:
+      - LCL_USE_PRESETS=docker
+      - LCL_DB__CONNECTION=postgres://postgres:postgres@postgres:5432/postgres
+    ports:
+      - 3000:3000
+      - 3001:3001
+      - 8080:8080
+    depends_on:
+      - postgres
+      - mailpit
+
+  postgres:
+    image: postgres
+    ports:
+     - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+     - 'postgres_data:/var/lib/postgresql/data'
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - 8025:8025
+      - 1025:1025
+volumes:
+  postgres_data:

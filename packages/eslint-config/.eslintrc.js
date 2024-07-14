@@ -33,5 +33,6 @@ module.exports = {
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/unified-signatures": "off",
     "no-nested-ternary": "off",
+    "import/no-named-as-default-member": "off",
   },
 };

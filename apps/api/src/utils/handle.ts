@@ -13,6 +13,8 @@ import type {
 } from 'fastify';
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import type { ResolveFastifyReplyReturnType } from 'fastify/types/type-provider';
+import type { AuthContext } from './auth/context';
+import { makeAuthContext } from './auth/context';
 
 export type RequestContext<
   RawServer extends RawServerBase = RawServerDefault,
@@ -70,9 +72,10 @@ export type RequestContext<
     ContextConfig,
     Logger
   >['query'];
+  auth: AuthContext;
 };
 
-export function handle<
+export function handler<
   RawServer extends RawServerBase = RawServerDefault,
   RawRequest extends
     RawRequestDefaultExpression<RawServer> = RawRequestDefaultExpression<RawServer>,
@@ -83,7 +86,7 @@ export function handle<
   SchemaCompiler extends FastifySchema = FastifySchema,
   Logger extends FastifyBaseLogger = FastifyBaseLogger,
 >(
-  handler: (
+  reqHandler: (
     ctx: RequestContext<
       RawServer,
       RawRequest,
@@ -108,16 +111,18 @@ export function handle<
   ZodTypeProvider,
   Logger
 > {
-  const reqHandler: any = async (req: any, res: any) => {
-    let result: any = handler({
+  const realHandler: any = async (req: any, res: any) => {
+    const auth = await makeAuthContext(req);
+    let result: any = reqHandler({
       req,
       res,
       body: req.body,
       params: req.params,
       query: req.query,
+      auth,
     });
     if (result instanceof Promise) result = await result;
     res.send(result);
   };
-  return reqHandler;
+  return realHandler;
 }

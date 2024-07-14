@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html {
+  @apply bg-bg text-text;
+}
+
+html.stop-scroll, html.stop-scroll body {
+  @apply overflow-hidden;
+}
