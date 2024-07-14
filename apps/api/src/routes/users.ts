@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { AuthContext } from '@/utils/auth/context';
-import { mapExpandedUser, mapUser } from '@/mappings/user';
+import { mapExpandedUser, mapSearchResult, mapUser } from '@/mappings/user';
 import { createSession, makeSessionToken } from '@/utils/auth/session';
 import { hashPassword } from '@/utils/auth/pass';
 import { prisma } from '@/modules/prisma';
@@ -142,6 +142,38 @@ export const usersRouter = makeRouter((app) => {
         },
       });
       return mapPage(query, users.map(mapUser), totalUsers);
+    }),
+  );
+
+  app.post(
+    '/api/v1/users/search',
+    {
+      schema: {
+        description: 'Search users',
+        body: z.object({
+          keyword: z.string(),
+        }),
+      },
+    },
+    handler(async ({ body, auth }) => {
+      auth.check((c) => c.isAuthenticated()); // TODO better perms
+      if (body.keyword.length < 4) return [];
+
+      const exactMatch = await prisma.user.findUnique({
+        where: {
+          email: body.keyword,
+        },
+      });
+      const userMatches = await prisma.user.findMany({
+        where: {
+          email: {
+            contains: body.keyword, // TODO change to username
+          },
+        },
+      });
+
+      const results = [...(exactMatch ? [exactMatch] : []), ...userMatches];
+      return results.map((v) => mapSearchResult(v, v.email === body.keyword));
     }),
   );
 });
