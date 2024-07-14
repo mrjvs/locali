@@ -3,21 +3,26 @@ import { makeRouter } from '@/utils/routes';
 import { prisma } from '@/modules/prisma';
 import { handler } from '@/utils/handle';
 import { getId } from '@/utils/get-id';
-import { NotFoundError } from '@/utils/error';
+import { ApiError, apiErrorCodes, NotFoundError } from '@/utils/error';
 import { mapPage, pagerSchema } from '@/utils/pages';
 import { mapOrgMember } from '@/mappings/orgmember';
+import { orgRoles } from '@/utils/perms/roles';
+import { generateSecureKey } from '@/utils/auth/pass';
+import { inviteEmail } from '@/modules/emails/templates/invite';
 
 export const organisationMemberRouter = makeRouter((app) => {
   app.post(
-    '/api/v1/organisations/:org/members',
+    '/api/v1/organisations/:org/members/invite',
     {
       schema: {
-        description: 'Add organisation member',
+        description: 'Invite organisation member',
         params: z.object({
           org: z.string(),
         }),
         body: z.object({
-          userId: z.string().min(1),
+          email: z.string().email().optional(),
+          userId: z.string().min(1).optional(),
+          roles: z.array(z.nativeEnum(orgRoles)).default([]),
         }),
       },
     },
@@ -25,17 +30,42 @@ export const organisationMemberRouter = makeRouter((app) => {
       auth.check((c) =>
         c.hasPerm('CREATE:/organisation/{org}/member', { org: params.org }),
       );
-      const newMember = await prisma.orgMember.create({
+
+      let email = body.email;
+      if (body.userId) {
+        const user = await prisma.user.findUnique({
+          where: {
+            id: body.userId,
+          },
+        });
+        email = user?.email;
+      }
+
+      if (!email) throw new ApiError(apiErrorCodes.invalid, 'invalid', 400);
+
+      const newInvite = await prisma.orgInviteCode.create({
         data: {
-          id: getId('orgmbr'),
+          id: getId('orginv'),
           orgId: params.org,
-          userId: body.userId,
+          code: generateSecureKey(),
+          email,
+          roles: body.roles,
         },
         include: {
-          user: true,
+          org: true,
         },
       });
-      return mapOrgMember(newMember);
+
+      await inviteEmail.send({
+        props: {
+          inviteLink: 'test',
+          orgName: newInvite.org.name,
+          type: 'org',
+        },
+        to: newInvite.email,
+      });
+
+      return { success: true };
     }),
   );
 

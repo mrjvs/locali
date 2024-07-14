@@ -16,7 +16,7 @@ model User {
   roles        String[]      @default([])
   sessions     UserSession[]
 
-  orgMembers    OrgMember[]
+  orgMembers     OrgMember[]
   projectMembers ProjectMember[]
 
   @@map("user")
@@ -36,11 +36,12 @@ model Organisation {
   id        String   @id
   createdAt DateTime @default(now()) @map("created_at")
 
-  name String
+  name        String
   description String?
 
-  projects Project[]
-  members  OrgMember[]
+  projects      Project[]
+  members       OrgMember[]
+  OrgInviteCode OrgInviteCode[]
 
   @@map("organisation")
 }
@@ -65,9 +66,10 @@ model Project {
   org       Organisation @relation(fields: [orgId], references: [id], onDelete: Cascade)
   orgId     String       @map("org_id")
 
-  name    String
-  description String?
-  members ProjectMember[]
+  name           String
+  description    String?
+  members        ProjectMember[]
+  ProjInviteCode ProjInviteCode[]
 
   @@map("project")
 }
@@ -84,4 +86,34 @@ model ProjectMember {
   roles String[] @default([])
 
   @@map("project_member")
+}
+
+model OrgInviteCode {
+  id        String   @id
+  createdAt DateTime @default(now()) @map("created_at")
+  code      String   @unique
+
+  email String
+  org   Organisation @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  orgId String       @map("org_id")
+
+  roles String[] @default([])
+
+  @@unique([email, orgId])
+  @@map("org_invite_code")
+}
+
+model ProjInviteCode {
+  id        String   @id
+  createdAt DateTime @default(now()) @map("created_at")
+  code      String   @unique
+
+  email     String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String  @map("project_id")
+
+  roles String[] @default([])
+
+  @@unique([email, projectId])
+  @@map("project_invite_code")
 }
