@@ -9,7 +9,8 @@
     "dev": "turbo run dev --parallel --concurrency 25",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "dev:init": "turbo run dev:init"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

@@ -7,6 +7,9 @@ export default defineNuxtConfig({
     "nuxt-svgo",
     "nuxt-icon"
   ],
+  devServer: {
+    port: 3001
+  },
   components: {
     dirs: [{ path: '~/components', pathPrefix: false }]
   },

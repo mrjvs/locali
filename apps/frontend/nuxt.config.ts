@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     "nuxt-svgo",
     "nuxt-icon"
   ],
+  devServer: {
+    port: 3000
+  },
   runtimeConfig: {
     public: {
       docsUrl: 'https://github.com/mrjvs/locali',

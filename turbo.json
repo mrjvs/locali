@@ -12,6 +12,10 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "dev:init": {
+      "cache": false,
+      "persistent": false
     }
   }
 }

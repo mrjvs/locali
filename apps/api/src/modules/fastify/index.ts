@@ -37,6 +37,15 @@ export async function setupFastify(): Promise<FastifyInstance> {
           description: 'Development server',
         },
       ],
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
+      },
     },
     transform: jsonSchemaTransform,
   });

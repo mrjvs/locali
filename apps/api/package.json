@@ -20,9 +20,10 @@
     "build": "tsup",
     "dev": "tsup --watch --onSuccess 'node dist/main.js'",
     "dev:email": "email dev --dir ./src/modules/emails/templates",
-    "seed": "tsup --config tsup.seed.config.ts --onSuccess 'node dist/modules/prisma/seed.js'",
+    "seed": "tsup --config tsup.seed.config.ts --onSuccess 'node dist/seed.js'",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "dev:init": "pnpm run build && prisma generate && prisma migrate dev"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
