@@ -1,5 +1,10 @@
 <template>
-  <h1 :class="c(props)"><slot /></h1>
+  <h1 class="flex items-end justify-between">
+    <span :class="c(props)"><slot /></span>
+    <span>
+      <slot name="right" />
+    </span>
+  </h1>
 </template>
 
 <script setup lang="ts">

@@ -24,6 +24,12 @@
                   </MenuItem>
                 </div>
                 <TopNavDropdownDivider />
+                <div class="p-2 space-y-1.5 flex flex-col">
+                  <MenuItem v-slot="{ active }" v-if="user" v-for="member in user.orgMembers" :key="member.id">
+                      <TopNavDropdownItem :active="active" :to="`/org/${member.org.id}`">{{ member.org.name }}</TopNavDropdownItem>
+                    </MenuItem>
+                  <TopNavDropdownDivider />
+                </div>
                 <div class="p-5 flex flex-col text-text">
                   <Heading size="text" class="mb-2">New organisation</Heading>
                   <p class="mb-4">Want to translate your projects? Create a new organisation.</p>
@@ -43,6 +49,7 @@ import { Menu, MenuItems, MenuItem, MenuButton } from '@headlessui/vue';
 import { useAuthStore } from '~/store/auth';
 
 const authStore = useAuthStore();
+const user = computed(() => authStore.user?.user);
 
 const props = defineProps<{
   user: {
