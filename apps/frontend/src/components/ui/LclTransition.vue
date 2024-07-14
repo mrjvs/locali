@@ -52,7 +52,7 @@ export type AnimationClasses = {
   leaveTo?: string;
 };
 
-export type Animation = "slide-from-top" | "slide-from-bottom-fade-out" | "none";
+export type Animation = "slide-from-top" | "slide-from-bottom-fade-out" | "fade" | "none";
 const animations: Record<Animation, AnimationClasses> = {
   "slide-from-top": {
     enter: "transition duration-100",
@@ -69,6 +69,15 @@ const animations: Record<Animation, AnimationClasses> = {
     leave: "transition origin-center duration-200",
     leaveFrom: "opacity-100 scale-100",
     leaveTo: "opacity-0 scale-90",
+    move: "transition-all duration-200"
+  },
+  "fade": {
+    enter: "transition duration-200",
+    enterFrom: "opacity-0",
+    enterTo: "opacity-100",
+    leave: "transition duration-200",
+    leaveFrom: "opacity-100",
+    leaveTo: "opacity-0",
     move: "transition-all duration-200"
   },
   none: {},
