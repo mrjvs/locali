@@ -13,6 +13,12 @@ export type OrgCreatePayload = {
   description: string | null;
 }
 
+export type OrgMemberInvitePayload = {
+  email?: string;
+  userId?: string;
+  roles: string[];
+}
+
 export type UserSideOrgMemberRes = {
   id: string;
   createdAt: string;
@@ -47,5 +53,11 @@ export async function createOrg(payload: OrgCreatePayload) {
 export async function listOrgMembers(id: string, page: PageControls) {
   return $api.fetch<PageRes<OrgMemberRes>>(`/api/v1/organisations/${id}/members`, {
     query: page,
+  });
+}
+
+export async function inviteOrgMember(orgId: string, payload: OrgMemberInvitePayload) {
+  return $api.fetch<void>(`/api/v1/organisations/${orgId}/members/invite`, {
+    body: payload,
   });
 }

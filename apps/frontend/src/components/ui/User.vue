@@ -20,7 +20,7 @@
       >
         {{ props.user.name }}
       </p>
-      <p>{{ props.user.email }}</p>
+      <p v-if="props.user.email">{{ props.user.email }}</p>
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@
 const props = defineProps<{
   user: {
     name: string;
-    email: string;
+    email?: string;
   };
   inverted?: boolean;
 }>();

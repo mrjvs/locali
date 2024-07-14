@@ -11,6 +11,7 @@ export const appRolesSchema = z.nativeEnum(appRoles);
 export const orgRoles = {
   admin: 'org:admin', // organisation admin, can do everything on an org
   translator: 'org:translator', // translator, can translate on every project for org
+  viewer: 'org:viewer', // viewer, can view every project for org
 } as const;
 export type OrgRoles = Enum<typeof orgRoles>;
 export const orgRolesSchema = z.nativeEnum(orgRoles);

@@ -33,6 +33,7 @@ export const rolePerms: Record<Roles, string[]> = {
     'DELETE:/organisation/{org}/project/*/member/*',
   ],
   'org:translator': [],
+  'org:viewer': [],
   'proj:admin': [],
   'proj:maintainer': [],
   'proj:translator': [],
